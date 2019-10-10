@@ -51,7 +51,7 @@ public class OTest {
 	public static long cal5(int n) {
 		long sum = 0;
 		for(int i = 1 ; i <= n ; i ++) {
-			for(int j = 1 ; j <= n ; j *= 2) {
+			for(int j = 1 ; j <= n ; j = j * 2) {
 				sum += i + j;
 			}
 		}

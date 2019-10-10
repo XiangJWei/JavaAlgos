@@ -2,7 +2,7 @@ package com.xiangjw.array;
 
 public class ArrayTest {
 	
-	private static void printArrAddr() {
+	protected static void printArrAddr() {
 		int arr[] = new int[100];
 		System.out.println("数组arr地址：" + System.identityHashCode(arr));
 		System.out.println("数组arr[0]地址：" + System.identityHashCode(arr[0]));
