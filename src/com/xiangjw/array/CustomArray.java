@@ -130,6 +130,27 @@ public class CustomArray {
 		return arr[index];
 	}
 	
+	/**
+	 * 是否是回形串
+	 * 即 12321
+	 */
+	public boolean isPalindrome() {
+		if(length == 0) {
+			return false;
+		}
+		if(length == 1) {
+			return true;
+		}
+		
+		for(int i = 0 , j = length - 1 ; i <= j ; i ++ , j -- ) {
+			if(arr[i] != arr[j]) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	public void print() {
 		System.out.print("数组占用空间:" + sizeOfArr + "，数组元素个数" + length);
 		StringBuffer buffer = new StringBuffer("，[");
@@ -158,7 +179,7 @@ public class CustomArray {
 		array.print();
 		array.add(0, 2);
 		array.print();
-		array.add(3, 1);
+		array.add(3, 5);
 		array.print();
 		array.add(2, 9);
 		array.print();
@@ -173,5 +194,11 @@ public class CustomArray {
 		array.print();
 		array.remove(2);
 		array.print();
+		array.add(2);
+		array.print();
+		array.remove(2);
+		array.print();
+		
+		System.out.println("是回形串吗？  " + array.isPalindrome());
 	}
 }

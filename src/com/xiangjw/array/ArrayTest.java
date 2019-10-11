@@ -1,5 +1,7 @@
 package com.xiangjw.array;
 
+import java.util.LinkedList;
+
 public class ArrayTest {
 	
 	protected static void printArrAddr() {
@@ -80,5 +82,7 @@ public class ArrayTest {
 		printArr();
 		
 		outOfBound();
+		
+		LinkedList<String> a= new LinkedList<String>();
 	}
 }

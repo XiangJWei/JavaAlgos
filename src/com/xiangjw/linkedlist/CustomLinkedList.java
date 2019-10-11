@@ -59,6 +59,27 @@ public class CustomLinkedList<T> {
 		}
 	}
 	
+	public void removeLast() {
+		if(length == 0) {
+			return;
+		}
+		if(length == 1) {
+			firstNode = null;
+			length --;
+			return;
+		}
+		Node p = firstNode;
+		while(p != null) {
+			if(p.getNext() != null && p.getNext().getNext() == null) {
+				p.setNext(null);
+				length --;
+				return;
+			}
+			
+			p = p.getNext();
+		}
+	}
+	
 	
 	/**
 	 * 是否是回形串
@@ -184,5 +205,11 @@ public class CustomLinkedList<T> {
 		System.out.println("是回形串吗？  " + list.isPalindrome());
 		list.print();
 		
+		list.removeLast();list.print();
+		list.removeLast();list.print();
+		list.removeLast();list.print();
+		list.removeLast();list.print();
+		list.removeLast();list.print();
+		list.removeLast();list.print();
 	}
 }
