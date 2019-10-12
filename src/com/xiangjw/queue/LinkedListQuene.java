@@ -5,14 +5,18 @@ public class LinkedListQuene<T> {
 	private Node firstNode;
 	private int length;
 	
+	private Node lastNode;
+	
 	public LinkedListQuene(T unVal) {
 		length = 0;
 		firstNode = new Node(unVal, null);
+		lastNode = firstNode;
 	}
 	
 	public void push(T data) {
-		Node temp = new Node(data, firstNode.getNext());
-		firstNode.setNext(temp);
+		Node temp = new Node(data, null);
+		lastNode.setNext(temp);
+		lastNode = temp;
 		length ++;
 	}
 	
@@ -21,30 +25,21 @@ public class LinkedListQuene<T> {
 			return null;
 		}
 		
-		Node p = firstNode;
-		while(p != null) {
-			if(p.getNext() != null && p.getNext().getNext() == null) {
-				Node temp = p.getNext();
-				p.setNext(null);
-				length --;
-				return p.getData();
-			}
-			p = p.getNext();
-		}
-		
-		
+		Node temp = firstNode.getNext();
+		firstNode.setNext(temp.getNext());
+		length --;
 		return null;
 	}
 	
 	public void print() {
 		System.out.print("元素个数" + length);
-		StringBuffer buffer = new StringBuffer("，队列头<--[");
+		StringBuffer buffer = new StringBuffer("，队列尾-->[");
 		Node p = firstNode.getNext();
 		while (p != null) {
 			buffer.append(p.getData() == null ? "null" : p.getData().toString()).append(",");
 			p = p.getNext();
 		}
-		buffer.append("]<--队列尾");
+		buffer.append("]-->队列头");
 		
 		System.out.println(buffer.toString());
 	}
