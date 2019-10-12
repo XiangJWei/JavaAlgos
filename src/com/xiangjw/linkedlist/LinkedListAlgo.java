@@ -37,11 +37,20 @@ public class LinkedListAlgo {
 	}
 	
 	public void add(Node node) {
+		//先找node的长度，因为node可能不是一个单一节点，也可能是一个链表
+		Node m = node;
+		int count = 0;
+		while(m != null) {
+			count ++;
+			m = m .getNext();
+		}
+		
+		//再插入
 		Node p = firstNode;
 		while(p != null) {
 			if(p.getNext() == null) {
 				p.setNext(node);
-				length ++;
+				length += count;
 				return;
 			}
 			p = p .getNext();
@@ -90,21 +99,135 @@ public class LinkedListAlgo {
 		newNode.print();
 	}
 	
+	/**
+	 * 检测链表是否包含环，如果有，返回环的入口点
+	 * 
+	 * @return
+	 */
 	public Node checkIfRound() {
 		if(length <= 1) {
 			return null;
 		}
-		Node p = firstNode.getNext();
-		Node q = firstNode.getNext().getNext();
+		Node p = firstNode.getNext();//慢指针
+		Node q = firstNode.getNext();//快指针
+		int i = 0;
+		boolean isOk = false;
 		while(q != null && q.getNext() != null && q.getNext().getNext() != null) {
-			if(p == q) {
-				return p;
+			//如果有环，那慢指针进环后，下一次快指针超过慢指针时必然会和慢指针相遇
+			if(i > 0 && p == q) {//排除第一次，因为第一次两个指针就在一起
+				isOk = true;
+				System.out.println("第" + i + "步相遇");
+				break;
 			}
 			p = p.getNext();
 			q = q.getNext().getNext();
+			i++;
+		}
+		
+		if(isOk) {
+			//p回到起始位置，q还是在相遇点。
+			//这是两指针同速度跑，再次相遇点就是环的入口
+			//假设入口处为K，第一次两点相遇为N，则环的大小为N，假设P离下一次到入口还有M,则M = N - (N - K) = K
+			//所以把P移回起始点，Q在N点，两个指针同速度移动K步，就会在K点相遇。
+			p = firstNode.getNext();
+			while(q != null && p != null && p.getNext() != null && q.getNext() != null) {
+				if(p == q) {
+					//找到起始点，也就是K点
+					return p;
+				}
+				p = p.getNext();
+				q = q.getNext();
+			}
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 两个有序链表的合并
+	 * @param other
+	 */
+	public void sortWith(LinkedListAlgo other) {
+		Node p = firstNode.getNext();
+		Node q = other.firstNode.getNext();
+		LinkedListAlgo newList = new LinkedListAlgo(-1);
+		
+		while(p != null || q != null) {
+			if(p == null) {
+				//p已经遍历结束，所以直接追加q的剩余节点，循环终止
+				newList.add(q);
+				break;
+			}else if(q == null) {
+				//q已经遍历结束，所以直接追加p的剩余节点，循环终止
+				newList.add(p);
+				break;
+			}else if(p.getData() <= q.getData()){
+				//p、q都还有值，所以对比，p小放p，进入下一次循环
+				newList.add(new Node(p.getData(), null));
+				p = p.getNext();
+			}else {
+				//p、q都还有值，所以对比，q小放q，进入下一次循环
+				newList.add(new Node(q.getData(), null));
+				q = q.getNext();
+			}
+		}
+		
+		newList.print();
+	}
+	
+	/**
+	 * 删除链表倒数第 n 个结点
+	 * @param index
+	 */
+	public void deleteLastIndexOf(int index) {
+		if(index <= 0) {
+			return;
+		}
+		if(index > length) {
+			return;
+		}
+		
+		Node p = firstNode.getNext();
+		Node q = firstNode;
+		
+		int sp = 0;
+		while(p != null && sp < index - 1) {
+			//p指向正数第index个节点
+			sp ++;
+			p = p.getNext();
+		}
+		
+		while(p != null && p.getNext() != null) {
+			p = p.getNext();
+			q = q.getNext();
+		}
+		
+		//删除q节点的后一个节点
+		q.setNext(q.getNext().getNext());
+		length --;
+	}
+	
+	/**
+	 * 找链表的中间结点
+	 */
+	public void printMiddleNode() {
+		Node p = firstNode.getNext();
+		Node q = firstNode.getNext();
+		
+		while(q != null) {
+			if(q.getNext() == null) {
+				//基数行数，中间节点为一个
+				System.out.println("中间节点为：" + p.getData());
+				return;
+			}else if(q.getNext().getNext() == null) {
+				//基数行数，中间节点为两个
+				System.out.println("中间节点为：" + p.getData() + " + " + p.getNext().getData());
+				return;
+			}
+			
+			p = p.getNext();
+			q = q.getNext().getNext();
+		}
 	}
 	
 	public void print() {
@@ -166,9 +289,38 @@ public class LinkedListAlgo {
 		
 		list.roundOver();
 		Node circle = list.checkIfRound();
-		System.out.println("是否有环：" + (circle == null ? "木有": circle.getData()));
-		list.add(list.findByIndex(2));
+		System.out.println("是否有环：" + (circle == null ? "木有": "有，入口值为" + circle.getData()));
+		list.add(6);
+		list.print();
+		list.add(list.findByIndex(4));
 		Node circle2 = list.checkIfRound();
-		System.out.println("是否有环：" + (circle2 == null ? "木有": circle2.getData()));
+		System.out.println("是否有环：" + (circle2 == null ? "木有": "有，入口值为" + circle2.getData()));
+		
+		
+		LinkedListAlgo list2 = new LinkedListAlgo(-1);
+		list2.add(1);
+		list2.add(3);
+		list2.add(10);
+		list2.add(18);
+		list2.add(20);
+		list2.print();
+		
+		LinkedListAlgo list3 = new LinkedListAlgo(-1);
+		list3.add(2);
+		list3.add(11);
+		list3.add(19);
+		list3.add(25);
+		list3.add(30);
+		list3.print();
+		
+		list2.sortWith(list3);
+		
+		list3.printMiddleNode();
+		list3.deleteLastIndexOf(5);
+		list3.print();
+		list3.printMiddleNode();
+		list3.deleteLastIndexOf(3);
+		list3.print();
+		list3.printMiddleNode();
 	}
 }
