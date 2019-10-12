@@ -90,24 +90,21 @@ public class LinkedListAlgo {
 		newNode.print();
 	}
 	
-	public boolean checkIfRound() {
+	public Node checkIfRound() {
 		if(length <= 1) {
-			return false;
+			return null;
 		}
 		Node p = firstNode.getNext();
-		while(p != null) {
-			Node q = p.getNext();
-			while (q != null) {
-				if(q.getNext() != null && q.getNext() == p) {
-					return true;
-				}
-				
-				q = q.getNext();
+		Node q = firstNode.getNext().getNext();
+		while(q != null && q.getNext() != null && q.getNext().getNext() != null) {
+			if(p == q) {
+				return p;
 			}
 			p = p.getNext();
+			q = q.getNext().getNext();
 		}
 		
-		return false;
+		return null;
 	}
 	
 	public void print() {
@@ -168,8 +165,10 @@ public class LinkedListAlgo {
 		list.print();
 		
 		list.roundOver();
-		System.out.println("是否有环：" + list.checkIfRound());
+		Node circle = list.checkIfRound();
+		System.out.println("是否有环：" + (circle == null ? "木有": circle.getData()));
 		list.add(list.findByIndex(2));
-		System.out.println("是否有环：" + list.checkIfRound());
+		Node circle2 = list.checkIfRound();
+		System.out.println("是否有环：" + (circle2 == null ? "木有": circle2.getData()));
 	}
 }
