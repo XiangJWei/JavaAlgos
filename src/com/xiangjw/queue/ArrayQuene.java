@@ -6,12 +6,17 @@ public class ArrayQuene<T> {
 	
 	private int length;
 	
+	private int firstIndex;
+	private int lastIndex;
+	
 	private int sizeOfArr;
 	
 	public ArrayQuene(int size) {
 		this.arr = (T[])new Object[size];
 		this.length = 0;
 		this.sizeOfArr = size;
+		this.firstIndex = 0;
+		this.lastIndex = -1;
 	}
 	
 	public void push(T data) {
@@ -19,11 +24,7 @@ public class ArrayQuene<T> {
 			resize(sizeOfArr << 1);
 		}
 		
-		for(int i = length ; i > 0 ; i --) {
-			arr[i] = arr[i - 1];
-		}
-		
-		arr[0] = data;
+		arr[++lastIndex] = data;
 		length ++;
 	}
 	
@@ -32,8 +33,9 @@ public class ArrayQuene<T> {
 			return null;
 		}
 		
-		T temp = arr[--length];
-		arr[length] = null;
+		T temp = arr[firstIndex];
+		arr[firstIndex++] = null;
+		length --;
 		
 		if(sizeOfArr > 1 && sizeOfArr > length << 1) {
 			resize(sizeOfArr >> 1);
@@ -43,14 +45,18 @@ public class ArrayQuene<T> {
 	
 	public void resize(int size) {
 		T[] temp = (T[])new Object[size];
-		System.arraycopy(arr, 0, temp, 0, length);
+		System.arraycopy(arr, firstIndex, temp, 0, length);//这里有个位移
 		arr = temp;
 		sizeOfArr = size;
+		
+		//移动数组后，需重新设置起止指针
+		firstIndex = 0;
+		lastIndex = length -1;
 	}
 	
 	public void print() {
 		System.out.print("数组占用空间:" + sizeOfArr + "，数组元素个数" + length);
-		StringBuffer buffer = new StringBuffer("，队列头<--[");
+		StringBuffer buffer = new StringBuffer("，队列尾-->[");
 		for(int i = 0 ; i < sizeOfArr ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i]);
@@ -58,7 +64,7 @@ public class ArrayQuene<T> {
 				buffer.append(",").append(arr[i]);
 			}
 		}
-		buffer.append("]<--队列尾");
+		buffer.append("]-->队列头");
 		
 		System.out.println(buffer.toString());
 	}
