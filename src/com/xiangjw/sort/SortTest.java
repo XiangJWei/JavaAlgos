@@ -20,7 +20,7 @@ public class SortTest {
 			}
 			
 			if(!isSwaped) {
-				//某一次
+				//某一次没有发生任何顺序调换，说明全数组已经顺序ok，终止
 				return;
 			}
 		}
