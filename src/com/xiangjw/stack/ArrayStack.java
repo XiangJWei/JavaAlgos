@@ -1,5 +1,11 @@
 package com.xiangjw.stack;
 
+/**
+ * 数组实现栈，尾插尾删
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public class ArrayStack<T> {
 
 	private T[] arr;

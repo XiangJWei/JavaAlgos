@@ -1,5 +1,11 @@
 package com.xiangjw.stack;
 
+/**
+ * 链表实现栈   头插头删
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public class LinkedListStack<T> {
 	
 	private Node firstNode;

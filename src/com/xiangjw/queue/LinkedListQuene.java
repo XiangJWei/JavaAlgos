@@ -1,11 +1,19 @@
 package com.xiangjw.queue;
 
+/**
+ * 链表实现队列，尾插入，头删除。维护两个指针即可
+ * 
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public class LinkedListQuene<T> {
 	
 	private Node firstNode;
+	private Node lastNode;
+	
 	private int length;
 	
-	private Node lastNode;
 	
 	public LinkedListQuene(T unVal) {
 		length = 0;

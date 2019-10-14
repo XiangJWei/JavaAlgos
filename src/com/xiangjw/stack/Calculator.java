@@ -13,8 +13,8 @@ public class Calculator {
 	private ArrayStack<Character> opers;
 	
 	private static final String OPERATOR = "+-*/";
-	private static final String LEFT_SUB = "[{(";
-	private static final String RIGHT_SUB = "]})";
+	private static final String LEFT_SUB = "(";
+	private static final String RIGHT_SUB = ")";
 	
 	public Calculator(String info) {
 		this.info = info;
@@ -22,6 +22,10 @@ public class Calculator {
 		opers = new ArrayStack<Character>(10);
 	}
 	
+	/**
+	 * 括号开闭是否合规
+	 * @return
+	 */
 	public boolean isSubsOk() {
 		ArrayStack<Character> subs = new ArrayStack<Character>(10);
 		for(int i = 0 ; i < info.length() ; i ++) {
@@ -35,6 +39,7 @@ public class Calculator {
 				}
 			}
 		}
+		
 		return true;
 	}
 	

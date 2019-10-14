@@ -1,5 +1,13 @@
 package com.xiangjw.queue;
 
+/**
+ * 数组实现队列
+ * 尾插入，头删除（逻辑删除，数组内容依然存在，只是指针变了，摊还时间复杂度O(1)）
+ * 
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public class ArrayQuene<T> {
 
 	private T[] arr;

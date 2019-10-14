@@ -3,9 +3,9 @@ package com.xiangjw.stack;
 public class Brower {
 
 	//时刻保持backStack的栈顶为当前访问的页面
-	private ArrayStack<String> backStack;
+	private ArrayStack<String> backStack;//后退的数据栈
 	
-	private ArrayStack<String> frontStack;
+	private ArrayStack<String> frontStack;//前进的数据栈
 	
 	public Brower() {
 		backStack = new ArrayStack<String>(10);
