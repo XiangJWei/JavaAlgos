@@ -14,6 +14,11 @@ public class RecuTest {
 	
 	private int currDept;
 	
+	/**
+	 * 递归方式实现
+	 * @param total
+	 * @return
+	 */
 	public long getTotalSteps(int total) {
 		this.cache = new HashMap<Integer, Long>();
 		this.currDept = 0;
@@ -43,9 +48,40 @@ public class RecuTest {
 		return result;
 	}
 	
+	/**
+	 * 非递归方式实现
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public long getStepsWithoutRecu(int n) {
+		if(n == 1) {
+			return 1;
+		}
+		if(n == 2) {
+			return 2;
+		}
+		
+		long steps = 0;
+		long lastOne = 2;
+		long lastTwo = 1;
+		for(int i = 3 ; i <= n ; i ++) {
+			steps = lastOne + lastTwo;
+			lastTwo = lastOne;
+			lastOne = steps;
+		}
+		
+		return steps;
+	}
+	
 	public static void main(String []args) {
 		long before = System.currentTimeMillis();
-		System.out.println("走台阶，每次可以走一步或者两步，共有多少种走法？   --->" + new RecuTest().getTotalSteps(50));
+		System.out.println("走台阶，每次可以走一步或者两步，共有多少种走法？   递归方式--->" + new RecuTest().getTotalSteps(80));
 		System.out.println("耗时+" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		System.out.println("走台阶，每次可以走一步或者两步，共有多少种走法？   非递归方式--->" + new RecuTest().getStepsWithoutRecu(80));
+		System.out.println("耗时+" + (System.currentTimeMillis() - before) + "ms");
+		
 	}
 }
