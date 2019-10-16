@@ -94,6 +94,11 @@ public class SortTest {
 	
 	/**
 	 * 归并排序
+	 * 把N位的数组拆分成0~N/2和N/2~N的小问题，递归下去
+	 * 也就是先把两个拆分数组分别排序，然后再组合两个数组进行排序
+	 * 很稳定，时间复杂度O(nlogN)
+	 * 但是会占用额外的内存空间，空间复杂度O(n)
+	 * 由下至上，先处理子问题，再拼接两个子问题
 	 * 
 	 * @param a
 	 * @param start
@@ -136,6 +141,93 @@ public class SortTest {
 		//拷贝临时数组排序好的数据到原数组，完成本轮数组的排序工作
 		for(index = 0;index < length ; index ++) {
 			a[start++] = tempArr[index];
+		}
+	}
+	
+	/**
+	 * 快速排序
+	 * 也属于分治算法，每次取最后一个节点作为比较点，其他元素和它比，比它小就放它左边，比它大就放右边。
+	 * 然后再依次排序左边半部分和右边半部分，达到全局有序
+	 * 非稳定的排序算法，但它属于原地排序，基本不需要额外的内存空间
+	 * 由上至下，先处理本身，再处理两个子问题
+	 * 大部分情况下的时间复杂度都可以做到 O(nlogn)，只有在极端情况下，才会退化到 O(n²)，比如数组极端有序或者极端无序时
+	 * 
+	 * @param a
+	 * @param start
+	 * @param length
+	 */
+	public static void sortByQuick(int[] a , int start , int length) {
+		if(length <= 1) {
+			return;
+		}
+		
+		if(start < 0) {
+			return;
+		}
+		
+		//每次取最后一个节点作为比较点，其他元素和它比，比它小就放它左边，比它大就放右边
+		int end = start + length - 1;
+		int temp = a[end];
+		int middleIndex = start;
+		for(int index = start; index < end  ; index ++) {
+			if(a[index] <= temp) {
+				if(index == middleIndex) {
+					middleIndex ++;
+				}else if(a[index] != a[middleIndex]) {
+					int swap = a[index];
+					a[index] = a[middleIndex];
+					a[middleIndex ++] = swap;
+				}
+			}
+		}
+		//循环结束，把比较点放在中间位置区，原有位置元素移到最后
+		if(end != middleIndex && a[end] != a[middleIndex]) {
+			a[end] = a[middleIndex];
+			a[middleIndex] = temp;
+		}
+		
+		//分别处理比较点两边的子序列
+		sortByQuick(a , start , middleIndex - start);
+		sortByQuick(a , middleIndex + 1 , end - middleIndex);
+	}
+	
+	/**
+	 * 获取第K小的元素值，时间复杂度O(n)
+	 * 数组中存在重复值时就不适用了
+	 * @param a
+	 * @param start
+	 * @param length
+	 * @param k
+	 * @return
+	 */
+	public static int getKth(int[] a , int start , int length , int k) {
+		if(start < 0) {
+			return -1;
+		}
+		if(length <= 1) {
+			return a[start];
+		}
+		
+		int end = start + length - 1;
+		int middleIndex = start;
+		int temp = a[end];
+		for(int i = start ; i < end ; i ++) {
+			if(a[i] < temp) {
+				int swap = a[i];
+				a[i] = a[middleIndex];
+				a[middleIndex ++] = swap;
+			}
+		}
+		
+		a[end] = a[middleIndex];
+		a[middleIndex] = temp;
+		
+		if(k == middleIndex + 1) {
+			return a[middleIndex];
+		}else if(k < middleIndex + 1) {
+			return getKth(a, start, middleIndex - start, k);
+		}else {
+			return getKth(a, middleIndex + 1 , end - middleIndex, k);
 		}
 	}
 	
@@ -183,9 +275,19 @@ public class SortTest {
 		sortByMerge(a3 , 0 , length);
 		print(a3 , length);
 		
+		int[] a4 = {1, 2, 7 , 3, 5, 2, 10};
+		sortByQuick(a4 , 0 , length);
+		print(a4 , length);
+		
+		int[] a5 = {1, 2, 7 , 3, 5, 8, 10};
+		int k = 4;
+		System.out.println("获取到第" + k + "小的元素为：" + getKth(a5 , 0 , length , k));
+		print(a5 , length);
+		
 		//性能对比测试
 		long before = System.currentTimeMillis();
-		int num = 10 , size = 10000;
+		int num = 100 , size = 10000;
+		System.out.println("随机生成" + num + "个数组，每个数组" + size + "个元素，统计耗时情况如下：");
 		for(int i = 0 ; i < num ; i ++) {
 			int[] testArr = getTestArr(size);
 			sortByPop(testArr, size);
@@ -205,5 +307,20 @@ public class SortTest {
 			sortBySel(testArr, size);
 		}
 		System.out.println("选择排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByMerge(testArr, 0, size);
+		}
+		System.out.println("归并排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByQuick(testArr, 0, size);
+		}
+		System.out.println("快速排序，耗时" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
