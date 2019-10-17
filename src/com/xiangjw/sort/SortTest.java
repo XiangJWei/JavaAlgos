@@ -1,5 +1,6 @@
 package com.xiangjw.sort;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class SortTest {
@@ -231,6 +232,138 @@ public class SortTest {
 		}
 	}
 	
+	/**
+	 * 	桶排序
+	 * 按照值的范围均分为多个区间桶，每个桶里才单独进行快排。这样组成的桶的列表就是有序的
+	 * 对数据要求较高
+	 * 时间复杂度O(n)
+	 * @param arr
+	 * @param length
+	 */
+	public static void sortByBucket(int[] arr , int length) {
+		//先找到元素的最小值和最大值
+		int minVal = Integer.MAX_VALUE;
+		int maxVal = Integer.MIN_VALUE;
+		
+		for(int i = 0 ; i < length ; i ++) {
+			if(arr[i] > maxVal) {
+				maxVal = arr[i];
+			}
+			if(arr[i] < minVal) {
+				minVal = arr[i];
+			}
+		}
+		
+		//分桶,这里没有固定分法，主要还是看最大差值和数组元素个数来均衡衡量桶怎么分。
+		int valScope = maxVal - minVal;
+		int bucketNum;//桶的数量
+		if(valScope > 1000000) {
+			bucketNum = 10000;
+		}else if(valScope > 10000) {
+			bucketNum = 1000;
+		}else if(valScope > 100) {
+			bucketNum = 100;
+		}else if(valScope > 10) {
+			bucketNum = 10;
+		}else {
+			bucketNum = 1;
+		}
+		
+		int bucketSize = valScope / bucketNum;//单个桶的默认大小，不够再扩容
+		
+		int [][]bucketArr = new int[bucketNum][];//存放每个桶的各自数据
+		int []everyBucketLength = new int[bucketNum];//存放每个桶分别存储的数据量，length
+		//把所有数据分装到每一个桶里面去
+		for(int i = 0 ; i < length ; i ++) {
+			int bucketIndex = (arr[i] - minVal) / bucketSize;
+			bucketIndex = bucketIndex >= bucketNum ? bucketNum - 1 : bucketIndex;
+			
+			if(bucketArr[bucketIndex] == null) {
+				bucketArr[bucketIndex] = new int[bucketSize];//初始化
+			}
+			
+			//某个桶已经满了，要扩容
+			if(bucketArr[bucketIndex].length == everyBucketLength[bucketIndex]) {
+				bucketArr[bucketIndex] = resize(bucketArr[bucketIndex] , bucketArr[bucketIndex].length * 2);
+			}
+			
+			int newLength = everyBucketLength[bucketIndex];
+			bucketArr[bucketIndex][newLength] = arr[i];
+			everyBucketLength[bucketIndex] = newLength + 1;
+		}
+		
+		int arrIndex = 0;
+		for(int j = 0 ; j < bucketNum ; j ++) {
+			if(everyBucketLength[j] > 0) {
+				//接下来对每个桶分别进行排序
+				sortByQuick(bucketArr[j], 0, everyBucketLength[j]);
+				
+				//排序结果直接赋值到原数组里去，这样原数组就有序了
+				for(int k = 0 ; k < everyBucketLength[j] ; k ++) {
+					arr[arrIndex++] = bucketArr[j][k];
+				}
+			}
+		}
+	}
+	
+	private static int[] resize(int []arr , int newLength) {
+		int[] newArr = new int[newLength];
+		System.arraycopy(arr, 0, newArr, 0, arr.length);
+		return newArr;
+	}
+	
+	/**
+	 * 计数排序
+	 * 和桶排序类似，适用于值范围很小的情况，每个值给一个桶，桶里放这个值和前值出现的次数和。
+	 * 再分析这个桶得到每个元素应该在的位置
+	 * 时间复杂度O(n)
+	 * @param arr
+	 * @param length
+	 */
+	public static void sortByCounting(int[] arr , int length) {
+		//先找到元素的最小值和最大值
+		int minVal = Integer.MAX_VALUE;
+		int maxVal = Integer.MIN_VALUE;
+		for(int i = 0 ; i < length ; i ++) {
+			if(arr[i] > maxVal) {
+				maxVal = arr[i];
+			}
+			if(arr[i] < minVal) {
+				minVal = arr[i];
+			}
+		}
+		
+		//区间范围内每个int值定义一个桶，当然一个桶里面只表示一个值，记录这个值在数组中的次数（包括前值的次数）
+		int valScope = maxVal - minVal + 1;
+		int[] bucketArr = new int[valScope];//存放每个值对应的次数（包括前值）
+		for(int i = 0 ; i < valScope ; i ++) {
+			for(int j = 0 ; j < length ; j ++) {
+				if(arr[j] == i + minVal) {
+					bucketArr[i] ++;
+				}
+			}
+			
+			//加上前值的次数
+			if(i < valScope - 1) {
+				bucketArr[i + 1] = bucketArr[i];
+			}
+		}
+		
+		int[] temp = new int[length];
+		for(int i = length - 1 ; i >= 0 ; i --) {
+			int bucketIndex = arr[i] - minVal;
+			int numVal = bucketArr[bucketIndex];
+			temp[numVal - 1] = arr[i];
+			bucketArr[bucketIndex] = numVal - 1;
+		}
+		
+		System.arraycopy(temp, 0, arr, 0, length);
+	}
+	
+	public static void sortByRadix(int[] arr , int length) {
+		
+	}
+	
 	public static void print(int[] arr , int length) {
 		System.out.print("数组占用空间:" + arr.length + "，数组元素个数" + length);
 		StringBuffer buffer = new StringBuffer("，[");
@@ -250,7 +383,7 @@ public class SortTest {
 		int[] testArr = new int[length];
 		Random random =new Random();
 		for(int i = 0; i < length ; i ++) {
-			testArr[i] = random.nextInt();
+			testArr[i] = random.nextInt(10000);
 		}
 		
 		return testArr;
@@ -283,6 +416,24 @@ public class SortTest {
 		int k = 4;
 		System.out.println("获取到第" + k + "小的元素为：" + getKth(a5 , 0 , length , k));
 		print(a5 , length);
+		
+		length = 20;
+		int[] a6 = new int[length];
+		Random random =new Random();
+		for(int i = 0; i < length ; i ++) {
+			a6[i] = random.nextInt(10000);
+		}
+		sortByBucket(a6 , length);
+		print(a6 , length);
+		
+		length = 20;
+		int[] a7 = new int[length];
+		for(int i = 0; i < length ; i ++) {
+			a7[i] = random.nextInt(100);
+		}
+		sortByCounting(a7 , length);
+		print(a7 , length);
+		
 		
 		//性能对比测试
 		long before = System.currentTimeMillis();
@@ -322,5 +473,19 @@ public class SortTest {
 			sortByQuick(testArr, 0, size);
 		}
 		System.out.println("快速排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByBucket(testArr , size);
+		}
+		System.out.println("桶排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByCounting(testArr , size);
+		}
+		System.out.println("计数排序，耗时" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
