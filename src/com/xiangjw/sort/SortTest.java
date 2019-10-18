@@ -2,6 +2,7 @@ package com.xiangjw.sort;
 
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class SortTest {
 
@@ -361,7 +362,46 @@ public class SortTest {
 	}
 	
 	public static void sortByRadix(int[] arr , int length) {
+		int maxVal = Integer.MIN_VALUE;
+		for(int i = 0 ; i < length ; i ++) {
+			if(arr[i] > maxVal) {
+				maxVal = arr[i];
+			}
+		}
 		
+		int num = 1;
+		while(num <= maxVal) {
+			sortRadixFromCounting(arr , length , num);
+			num = num * 10;
+		}
+	}
+	
+	public static void sortRadixFromCounting(int[] arr , int length ,int num) {
+		int[] bucket = new int[10];
+		//计数排序的思想
+		for(int i = 0 ; i < bucket.length ; i ++) {
+			for(int j = 0 ; j < length ; j ++) {
+				int currNum = arr[j] % (num * 10) / num;//获取数目个位、十位...的具体值
+				if(currNum == i) {
+					bucket[i] = bucket[i] + 1;
+				}
+			}
+			
+			if(i < bucket.length - 1) {
+				bucket[i + 1] = bucket[i];
+			}
+		}
+		
+		int[] temp = new int[length];
+		int index = 0;
+		for(int k = length - 1 ; k >= 0 ; k --) {
+			int currNum = arr[k] % (num * 10) / num;//获取数目个位、十位...的具体值
+			int newIndex = bucket[currNum] - 1;
+			temp[newIndex] = arr[k];
+			bucket[currNum] = newIndex;
+		}
+		
+		System.arraycopy(temp, 0, arr, 0, length);
 	}
 	
 	public static void print(int[] arr , int length) {
@@ -381,9 +421,8 @@ public class SortTest {
 	
 	public static int[] getTestArr(int length) {
 		int[] testArr = new int[length];
-		Random random =new Random();
-		for(int i = 0; i < length ; i ++) {
-			testArr[i] = random.nextInt(10000);
+		for(int m = 0; m < length ; m ++) {
+			testArr[m] = (int)((Math.random() * 9 + 1) * 100000);//生成一个六位数的随机整数
 		}
 		
 		return testArr;
@@ -434,11 +473,18 @@ public class SortTest {
 		sortByCounting(a7 , length);
 		print(a7 , length);
 		
+		int[] a8 = new int[length];
+		for(int i = 0; i < length ; i ++) {
+			a8[i] = (int)((Math.random() * 9 + 1) * 100000);//生成一个六位数的随机整数
+		}
+		sortByRadix(a8 , length);
+		print(a8 , length);
+		
 		
 		//性能对比测试
-		long before = System.currentTimeMillis();
-		int num = 100 , size = 10000;
+		int num = 100 , size = 1000;
 		System.out.println("随机生成" + num + "个数组，每个数组" + size + "个元素，统计耗时情况如下：");
+		long before = System.currentTimeMillis();
 		for(int i = 0 ; i < num ; i ++) {
 			int[] testArr = getTestArr(size);
 			sortByPop(testArr, size);
@@ -487,5 +533,12 @@ public class SortTest {
 			sortByCounting(testArr , size);
 		}
 		System.out.println("计数排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByRadix(testArr , size);
+		}
+		System.out.println("基数排序，耗时" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
