@@ -5,78 +5,113 @@ package com.xiangjw.linkedlist;
  * @author Administrator
  *
  */
-public class SkipLinkedList<T> {
+public class SkipLinkedList {
 	
 	private Node firstNode;//存储单链表
-	
 	private int length;
+	private int levelCount;
 	
-	private SkipNode[] skipArr;
+	private static final float SKIPLIST_P = 0.5f;
+	private static final int MAX_LEVEL = 16;
 	
 	public SkipLinkedList() {
-		this.firstNode = new Node(null , null);//哨兵
+		this.firstNode = new Node(-1 , 0);//哨兵
 		this.length = 0;
+		this.levelCount = 1;
 	}
 	
-	public int getDeep(int length) {
-		if(length <= 2) {
-			return 1;
-		}
-		
-		return getDeep(length / 2) + 1;
-	}
-	
-	public void initSkipArr() {
-		if(length < 100) {
+	public void insert(int val) {
+		if(val < 0){
 			return;
 		}
+		int level = randomLevel();
 		
-		int deep = getDeep(length);
-		skipArr = (SkipNode[]) new Object[deep];
-		
-		Node p = firstNode.getNext();
-		int index = 0;
-		while(p.getNext() != null) {
+		Node p = firstNode;
+		Node item = new Node(val , level);
+		//先补充第一个节点
+		for(int i = p.currLevel ; i < level ; i ++) {
+			if(p.next == null) {
+				p.next = new Node[level];
+				p.next[i] = new Node(-1 , level);
+			}else if(p.next[i] == null){
+				p.next[i] = new Node(p.next[0].data , level);
+			}else {
+				p.next[i].data = p.next[0].data;
+			}
 			
-			p = p.getNext();
+			p.next[i].currLevel = level;
 		}
+		
+		for(int i = 0; i < level ; i ++) {
+			Node m = firstNode;
+			while(m.next != null) {
+				if(m.data < val && (m.next[i].data >= val || m.next[i] == null)) {
+					break;
+				}
+				m = m.next[i];
+			}
+			
+			item.next[i] = m.next[i];
+			m.next[i] = item;
+		}
+		
+		if(levelCount < level) {
+			levelCount = level;
+		}
+		
+		length++;
 	}
 	
+	public void delete(int val) {
+		
+	}
 	
+	public int get() {
+		
+		return -1;
+	}
+	
+	private int randomLevel() {
+		int level = 1;
+		
+		while(Math.random() < SKIPLIST_P && level <=MAX_LEVEL) {
+			level ++;
+		}
+		
+		return level;
+	}
+	
+	public void print() {
+		Node p = firstNode;
+		StringBuffer buffer = new StringBuffer();
+		while(p.next != null && p.next[0] != null) {
+			buffer.append(p.next[0].data).append(",").append(p.next[0].currLevel).append(";");
+			p = p.next[0];
+		}
+		
+		System.out.println("当前链表：" + buffer.toString());
+	}
 	
 	private class Node {
-		private T data;
-		private Node next;
-		public T getData() {
-			return data;
+		private int data;
+		private Node[] next;//next[0]存放原本链表的下一个，next[1]存放跳表上一层的对应对象，以此类推。
+		private int currLevel;//当前节点共有多少层
+		public Node() {
+			super();
 		}
-		public void setData(T data) {
-			this.data = data;
-		}
-		public Node getNext() {
-			return next;
-		}
-		public void setNext(Node next) {
-			this.next = next;
-		}
-		public Node(T data, SkipLinkedList<T>.Node next) {
+		public Node(int data , int currLevel) {
 			super();
 			this.data = data;
-			this.next = next;
+			this.currLevel = currLevel;
 		}
 	}
 	
-	private class SkipNode extends Node{
-		private Node down;
-		public Node getDown() {
-			return down;
-		}
-		public void setDown(Node down) {
-			this.down = down;
-		}
-		public SkipNode(T data, SkipLinkedList<T>.Node next, SkipLinkedList<T>.Node down) {
-			super(data, next);
-			this.down = down;
-		}
+	public static void main(String[] args) {
+		SkipLinkedList list = new SkipLinkedList();
+		list.insert(5);list.print();
+		list.insert(3);list.print();
+		list.insert(1);list.print();
+		list.insert(2);list.print();
+		list.insert(5);list.print();
 	}
 }
