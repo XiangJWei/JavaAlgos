@@ -193,6 +193,72 @@ public class SortTest {
 		sortByQuick(a , middleIndex + 1 , end - middleIndex);
 	}
 	
+	
+	/**
+	 * 堆排序
+	 * @param arr
+	 * @param length
+	 */
+	public static void sortByHeap(int arr[] , int length) {
+		if(length <= 1) {
+			return;
+		}
+		
+		//建堆
+		//从第一个非叶子节点开始往前遍历。
+		//如果当前节点比子节点最大值还大，就往下交换，从上往下堆化。
+		//依次完成所有非叶子节点的遍历后，就形成了一个堆
+		//这一块的时间复杂度是O(n)
+		int index = length / 2 - 1;//从第一个非叶子节点开始
+		while(index >= 0) {
+			int tempIndex = index;
+			while(tempIndex * 2 + 1 < length) {
+				int leftChild = arr[tempIndex * 2 + 1];
+				int rightChild = tempIndex * 2 + 2 == length ? Integer.MIN_VALUE : arr[tempIndex * 2 + 2];//如果没有右子节点，就置为最小值
+				int maxIndex = leftChild > rightChild ? (tempIndex * 2 + 1) : (tempIndex * 2 + 2);//左子节点和右子节点，最的值大
+				if(arr[tempIndex] < arr[maxIndex]) {
+					int temp = arr[tempIndex];
+					arr[tempIndex] = arr[maxIndex];
+					arr[maxIndex] = temp;
+				}else {
+					break;
+				}
+				
+				tempIndex = maxIndex;
+			}
+			
+			index --;
+		}
+		
+		//排序
+		//堆顶就是最大元素，排序过程就是每次移除堆顶最大值，然后重新堆化，再移除堆顶...最后移除完成即全部有序了
+		//这部分时间复杂度O(nlogN)
+		for(int i = length - 1 ; i > 0 ; i --) {
+			//堆顶和堆尾互换
+			int temp = arr[0];
+			arr[0] = arr[i];
+			arr[i] = temp;
+			
+			//从0到i-1进行堆化，从上到下
+			int j = 0;
+			while(j * 2 + 1 < i) {
+				int left = arr[2 * j + 1];//左边子节点
+				int right = 2 * j + 2 == i ? Integer.MIN_VALUE : arr[2 * j + 2];//右边子节点或最小值
+				int maxIndex = left > right ? (2 * j + 1) : (2 * j + 2);
+				
+				if(arr[j] < arr[maxIndex]) {
+					int temp2 = arr[j];
+					arr[j] = arr[maxIndex];
+					arr[maxIndex] = temp2;
+				}else {
+					break;
+				}
+				
+				j = maxIndex;
+			}
+		}
+	}
+	
 	/**
 	 * 获取第K小的元素值，时间复杂度O(n)
 	 * 数组中存在重复值时就不适用了
@@ -361,6 +427,13 @@ public class SortTest {
 		System.arraycopy(temp, 0, arr, 0, length);
 	}
 	
+	/**
+	 * 基数排序
+	 * 适用于电话号码排序这种定长排序，先按最后一位排序，再按倒数第二位排序，...最终按第一位排序，得到的就是有序的
+	 * 时间复杂度O(n)
+	 * @param arr
+	 * @param length
+	 */
 	public static void sortByRadix(int[] arr , int length) {
 		int maxVal = Integer.MIN_VALUE;
 		for(int i = 0 ; i < length ; i ++) {
@@ -451,6 +524,11 @@ public class SortTest {
 		sortByQuick(a4 , 0 , length);
 		print(a4 , length);
 		
+		int[] a9 = {1, 2, 7 , 3, 5, 2, 10};
+		sortByHeap(a9 , length);
+		print(a9 , length);
+		
+		
 		int[] a5 = {1, 2, 7 , 3, 5, 8, 10};
 		int k = 4;
 		System.out.println("获取到第" + k + "小的元素为：" + getKth(a5 , 0 , length , k));
@@ -519,6 +597,13 @@ public class SortTest {
 			sortByQuick(testArr, 0, size);
 		}
 		System.out.println("快速排序，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < num ; i ++) {
+			int[] testArr = getTestArr(size);
+			sortByHeap(testArr, size);
+		}
+		System.out.println("堆排序，耗时" + (System.currentTimeMillis() - before) + "ms");
 		
 		before = System.currentTimeMillis();
 		for(int i = 0 ; i < num ; i ++) {

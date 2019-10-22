@@ -34,6 +34,8 @@ public class CustomHeap {
 			if(temp < arr[i]) {
 				arr[i / 2] = arr[i];
 				arr[i] = temp;
+			}else {
+				break;
 			}
 		}
 		
@@ -54,7 +56,8 @@ public class CustomHeap {
 		}
 		
 		arr[1] = arr[length];
-		for(int i = 1 ; i * 2 <= length ; i = i * 2) {
+		int i = 1;
+		while(i * 2 <= length) {
 			int tempLeft = arr[i * 2];
 			int tempRight = Integer.MIN_VALUE;
 			if(i * 2 + 1 <= length) {
@@ -65,7 +68,11 @@ public class CustomHeap {
 				int temp = arr[i];
 				arr[i] = arr[index];
 				arr[index] = temp;
+			}else {
+				break;
 			}
+			
+			i = index;
 		}
 		length --;
 	}
