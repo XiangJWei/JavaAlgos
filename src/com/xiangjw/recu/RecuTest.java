@@ -74,6 +74,55 @@ public class RecuTest {
 		return steps;
 	}
 	
+	public static void printWays(int arr[] , int length , int k) {
+		if(k == 1) {
+			for(int i = 0 ; i < length ; i++) {
+				System.out.print(arr[i] + ",");
+			}
+			System.out.println("");
+			return;
+		}
+		
+		for(int i = 0 ; i < k ; i++) {
+			//把a[i]和a[k-1]互换
+			int temp = arr[i];
+			arr[i] = arr[k-1];
+			arr[k-1] = temp;
+			
+			//针对k-1的数组再进行子排列
+			printWays(arr, length, k - 1);
+			
+			//子排列之后一定要再把互换的元素改回来
+			temp = arr[i];
+			arr[i] = arr[k-1];
+			arr[k-1] = temp;
+		}
+	}
+	
+	public static int getWays(int arr[] , int length , int k) {
+		if(k == 1) {
+			return 1;
+		}
+		
+		int sum = 0;
+		for(int i = 0 ; i < k ; i++) {
+			//把a[i]和a[k-1]互换
+			int temp = arr[i];
+			arr[i] = arr[k-1];
+			arr[k-1] = temp;
+			
+			//针对k-1的数组再进行子排列
+			sum += getWays(arr, length, k - 1);
+			
+			//子排列之后一定要再把互换的元素改回来
+			temp = arr[i];
+			arr[i] = arr[k-1];
+			arr[k-1] = temp;
+		}
+		
+		return sum;
+	}
+	
 	public static void main(String []args) {
 		long before = System.currentTimeMillis();
 		System.out.println("走台阶，每次可以走一步或者两步，共有多少种走法？   递归方式--->" + new RecuTest().getTotalSteps(80));
@@ -83,5 +132,8 @@ public class RecuTest {
 		System.out.println("走台阶，每次可以走一步或者两步，共有多少种走法？   非递归方式--->" + new RecuTest().getStepsWithoutRecu(80));
 		System.out.println("耗时+" + (System.currentTimeMillis() - before) + "ms");
 		
+		int[] arr = {1 , 3 , 5 , 7};
+		System.out.println("共有" + getWays(arr , arr.length , arr.length) + "种组合");
+		printWays(arr , arr.length , arr.length);
 	}
 }

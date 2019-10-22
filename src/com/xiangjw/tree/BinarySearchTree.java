@@ -3,6 +3,7 @@ package com.xiangjw.tree;
 /**
  * 二叉查找树
  * 二叉查找树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值。
+ * 如果树的左右两端平衡，那么时间复杂度接近于O(logN),极端情况时都在一端，那么时间复杂度退化为O(n)
  * @author Administrator
  *
  */
@@ -16,6 +17,10 @@ public class BinarySearchTree {
 		this.length = 0;
 	}
 	
+	/**
+	 * 添加树节点
+	 * @param val
+	 */
 	public void add(int val) {
 		if(root == null) {
 			root = new TreeNode(val, null, null);
@@ -44,6 +49,12 @@ public class BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * 删除树节点
+	 * @param parent
+	 * @param target
+	 * @param val
+	 */
 	public void delete(int val) {
 		delete(null, root, val);
 	}
@@ -135,6 +146,11 @@ public class BinarySearchTree {
 		}
 	}
 	
+	/**
+	 * 查找树
+	 * @param val
+	 * @return
+	 */
 	public TreeNode[] find(int val) {
 		TreeNode[] arr = new TreeNode[length];
 		find(arr , root , val);
@@ -167,9 +183,12 @@ public class BinarySearchTree {
 		}
 	}
 	
-	private void print() {
+	/**
+	 * 打印树
+	 */
+	public void print() {
 		print(root);
-		System.out.println(" length:" + length);
+		System.out.println(" length:" + length + " 树的高度：" + getTreeWeight(root));
 	}
 	
 	private void print(TreeNode tree) {
@@ -182,6 +201,20 @@ public class BinarySearchTree {
 		print(tree.right);
 	}
 	
+	/**
+	 * 获取树的高度
+	 * @param target
+	 * @return
+	 */
+	public int getTreeWeight(TreeNode target) {
+		if(target == null) {
+			return 0;
+		}
+		
+		int left = getTreeWeight(target.left);
+		int right = getTreeWeight(target.right);
+		return (left > right) ? (left + 1) : (right + 1);
+	}
 
 	private class TreeNode{
 		private int data;
