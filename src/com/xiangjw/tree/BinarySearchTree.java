@@ -71,7 +71,7 @@ public class BinarySearchTree {
 			}else if(target.left != null && target.right != null) {
 				//有两个子节点，选取左子节点中最大的一个，换到当前节点
 				TreeNode tempParent = target;
-				target.data = getMax(tempParent , target.left);
+				target.data = getMax(tempParent , target.left , true);
 				length --;
 			}else if(target.left != null){
 				//有一个左子节点
@@ -105,16 +105,21 @@ public class BinarySearchTree {
 		}
 	}
 	
-	private int getMax(TreeNode parent , TreeNode target) {
+	private int getMax(TreeNode parent , TreeNode target , boolean isLeft) {
 		if(target == null) {
 			return -1;
 		}
 		if(target.right == null) {
-			parent.right = target.left;
+			if(isLeft) {
+				parent.left = target.left;
+			}else {
+				parent.right = target.left;
+			}
+			
 			return target.data;
 		}
 		
-		return getMax(target , target.right);
+		return getMax(target , target.right , false);
 		
 	}
 	
