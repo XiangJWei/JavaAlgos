@@ -28,7 +28,7 @@ public class ArrayQuene<T> {
 	}
 	
 	public void push(T data) {
-		if(length == sizeOfArr) {
+		if(length + firstIndex == sizeOfArr) {
 			resize(sizeOfArr << 1);
 		}
 		
@@ -36,6 +36,10 @@ public class ArrayQuene<T> {
 		length ++;
 	}
 	
+	public int getLength() {
+		return length;
+	}
+
 	public T pull() {
 		if(length <= 0) {
 			return null;
@@ -49,6 +53,14 @@ public class ArrayQuene<T> {
 			resize(sizeOfArr >> 1);
 		}
 		return temp;
+	}
+	
+	public T get() {
+		if(length <= 0) {
+			return null;
+		}
+		
+		return arr[firstIndex];
 	}
 	
 	public void resize(int size) {

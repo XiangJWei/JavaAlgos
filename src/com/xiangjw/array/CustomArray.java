@@ -58,6 +58,21 @@ public class CustomArray {
 		return true;
 	}
 	
+	public boolean set(int index , int val) {
+		if(index == -1 || index >= sizeOfArr) {
+			System.out.println("out Of length");
+			return false;
+		}
+		
+		arr[index] = val;
+		
+		if(index >= length) {
+			length = index + 1;
+		}
+		
+		return true;
+	}
+	
 	/**
 	 *  ±º‰∏¥‘”∂»£∫O(1)
 	 */

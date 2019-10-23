@@ -80,6 +80,10 @@ public class DynamicArray<T> {
 		return true;
 	}
 	
+	public int getLength() {
+		return length;
+	}
+
 	public int query(T val) {
 		for(int i = 0 ; i < length ; i ++) {
 			if(val.equals(arr[i])) {

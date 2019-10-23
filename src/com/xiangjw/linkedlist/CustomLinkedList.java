@@ -13,6 +13,10 @@ public class CustomLinkedList<T> {
 		this.firstNode = null;
 	}
 	
+	public int getLength() {
+		return length;
+	}
+
 	public void addToFirst(T val) {
 		Node node = new Node(val, firstNode);
 		firstNode = node;
@@ -39,6 +43,39 @@ public class CustomLinkedList<T> {
 			p.setNext(node);
 			length++;
 		}
+	}
+	
+	public T getFirst() {
+		if(length == 0) {
+			return null;
+		}
+		
+		return firstNode.data;
+	}
+	
+	public T get(int index) {
+		if(index >= length) {
+			return null;
+		}
+		
+		Node p = firstNode;
+		for(int i = 0 ; i < index ; i ++) {
+			p = p.getNext();
+		}
+		
+		return p.getData();
+	}
+	
+	public boolean isExist(T val) {
+		Node p = firstNode;
+		while(p != null) {
+			if(p.getData().equals(val)) {
+				return true;
+			}
+			p = p.getNext();
+		}
+		
+		return false;
 	}
 	
 	public void addAfter(T compare , T val) {
