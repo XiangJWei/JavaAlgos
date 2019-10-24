@@ -109,7 +109,9 @@ public class StringCompare {
 		}
 		
 		//子串开始动起来了
-		for(int i = 0 ; i <= a.length - b.length ; i ++) {
+		int i = 0;
+		while(i <= a.length - b.length) {
+			int val = 1;
 			for(int j = b.length - 1 ; j >= 0 ; j --) {
 				int badMoveSteps = 0;
 				int goodMoveSteps = 0;
@@ -132,13 +134,15 @@ public class StringCompare {
 						}
 					}
 					
-					i += (badMoveSteps > goodMoveSteps) ? badMoveSteps : goodMoveSteps;
+					val = (badMoveSteps > goodMoveSteps) ? badMoveSteps : goodMoveSteps;
 					break;
 				}else if(j == 0){
 					//全部匹配
 					return i;
 				}
 			}
+			
+			i += val > 0 ? val : 1;
 		}
 		
 		return -1;
@@ -195,5 +199,18 @@ public class StringCompare {
 			}
 		}
 		System.out.println("RK算法从" + size + "个数组，每个数组" + length + "个元素中搜索子串，耗时" + (System.currentTimeMillis() - before) + "ms，成功匹配数量:" + successCount);
+		
+		before = System.currentTimeMillis();
+		successCount = 0;
+		for(int i = 0 ; i < size ; i ++) {
+			int res = findByBM(new String(parents[i]), new String(children[i]));
+			if(res >= 0) {
+				System.out.println("父串：" + new String(parents[i]).substring(res , res + children[i].length));
+				System.out.println("子串：" + new String(children[i]));
+				System.out.println("匹配到下标：" + res);
+				successCount ++;
+			}
+		}
+		System.out.println("BM算法从" + size + "个数组，每个数组" + length + "个元素中搜索子串，耗时" + (System.currentTimeMillis() - before) + "ms，成功匹配数量:" + successCount);
 	}
 }
