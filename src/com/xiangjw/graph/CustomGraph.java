@@ -85,7 +85,54 @@ public class CustomGraph {
 		System.out.println("");
 	}
 	
+	/**
+	 * 深度优先搜索
+	 * @param s 起始点
+	 * @param t 终点
+	 */
+	public void dfs(int s , int t) {
+		CustomArray visited = new CustomArray(graph.getLength());//初始全-1,记录已经被访问的订单，避免被重复访问
+		CustomArray prev = new CustomArray(graph.getLength());//初始全-1，记录某节点的上一个节点
+		
+		for(int i = 0 ; i < graph.getLength() ; i ++) {
+			visited.add(-1);
+			prev.add(-1);
+		}
+		
+		visited.set(s, 1);
+		dfs(visited , prev , s , t);
+		System.out.println("深度优先搜索，求" + s + "到" + t + "找到的路径如下");
+		printBfs(prev , s , t , t);
+		System.out.println("");
+	}
+	
+	private void dfs(CustomArray visited , CustomArray prev , int curr , int t) {
+		if(curr == t) {
+			return;
+		}
+		
+		
+		for(int i = 1 ; i < graph.findByIndex(curr).getLength() ; i ++) {
+			int temp = graph.findByIndex(curr).get(i);
+			if(temp == t) {
+				prev.set(temp, curr);
+				return;
+			}
+			
+			if(visited.findByIndex(temp) == -1) {
+				prev.set(temp, curr);
+				visited.set(temp, 1);
+				
+				dfs(visited , prev , temp , t);
+			}
+		}
+	}
+	
 	private void printBfs(CustomArray prev , int s , int t , int k) {
+		if(prev.findByIndex(t) == -1) {
+			System.out.print("无可达路径");
+			return;
+		}
 		if(k == s) {
 			System.out.print(k + ",");
 			return;
@@ -119,5 +166,6 @@ public class CustomGraph {
 		graph.print();
 		
 		graph.bfs(0 , 6);
+		graph.dfs(0 , 6);
 	}
 }
