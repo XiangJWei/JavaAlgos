@@ -1,5 +1,9 @@
 package com.xiangjw.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.xiangjw.array.CustomArray;
 import com.xiangjw.array.DynamicArray;
 import com.xiangjw.linkedlist.CustomLinkedList;
@@ -34,6 +38,9 @@ public class CustomGraph {
 		if(s >= graph.getLength() || t >= graph.getLength()) {
 			return;
 		}
+		if(s == t) {
+			return;
+		}
 		if(!graph.findByIndex(s).isExist(t))
 			graph.findByIndex(s).addToLast(t);
 		if(!graph.findByIndex(t).isExist(s))
@@ -46,7 +53,7 @@ public class CustomGraph {
 	 * @param s 起始点
 	 * @param t 终点
 	 */
-	public void bfs(int s , int t) {
+	public CustomArray bfs(int s , int t) {
 		ArrayQuene<CustomLinkedList<Integer>> queue = new ArrayQuene<CustomLinkedList<Integer>>(graph.getLength());
 		CustomArray visited = new CustomArray(graph.getLength());//初始全-1,记录已经被访问的订单，避免被重复访问
 		CustomArray prev = new CustomArray(graph.getLength());//初始全-1，记录某节点的上一个节点
@@ -80,9 +87,8 @@ public class CustomGraph {
 			}
 		}
 
-		System.out.println("广度优先搜索，求" + s + "到" + t + "最短的路径如下");
-		printBfs(prev , s , t , t);
-		System.out.println("");
+		return prev;
+
 	}
 	
 	/**
@@ -90,7 +96,7 @@ public class CustomGraph {
 	 * @param s 起始点
 	 * @param t 终点
 	 */
-	public void dfs(int s , int t) {
+	public CustomArray dfs(int s , int t) {
 		CustomArray visited = new CustomArray(graph.getLength());//初始全-1,记录已经被访问的订单，避免被重复访问
 		CustomArray prev = new CustomArray(graph.getLength());//初始全-1，记录某节点的上一个节点
 		
@@ -101,9 +107,8 @@ public class CustomGraph {
 		
 		visited.set(s, 1);
 		dfs(visited , prev , s , t);
-		System.out.println("深度优先搜索，求" + s + "到" + t + "找到的路径如下");
-		printBfs(prev , s , t , t);
-		System.out.println("");
+		return prev;
+
 	}
 	
 	private boolean dfs(CustomArray visited , CustomArray prev , int curr , int t) {
@@ -133,7 +138,7 @@ public class CustomGraph {
 		return false;
 	}
 	
-	private void printBfs(CustomArray prev , int s , int t , int k) {
+	public static void printBfs(CustomArray prev , int s , int t , int k) {
 		if(prev.findByIndex(t) == -1) {
 			System.out.print("无可达路径");
 			return;
@@ -170,7 +175,45 @@ public class CustomGraph {
 		graph.addEdge(6 , 7);
 		graph.print();
 		
-		graph.bfs(0 , 6);
-		graph.dfs(0 , 6);
+		int s = 0;
+		int t = 6;
+		CustomArray prev = graph.bfs(s , t);
+		System.out.println("广度优先搜索，求" + s + "到" + t + "最短的路径如下");
+		printBfs(prev , s , t , t);
+		System.out.println("");
+		
+		prev = graph.dfs(s , t);
+		System.out.println("深度优先搜索，求" + s + "到" + t + "找到的路径如下");
+		printBfs(prev , s , t , t);
+		System.out.println("");
+		
+		int size = 1000 , length = 10000;
+		List<CustomGraph> graphs = new ArrayList<CustomGraph>();
+		Random random = new Random();
+		for(int i = 0 ; i < size ; i ++ ) {
+			CustomGraph graphItem = new CustomGraph(length);
+			
+			for(int j = 0 ; j < random.nextInt(length) ; j ++) {
+				graph.addEdge(random.nextInt(length) , random.nextInt(length));
+			}
+			graphs.add(graphItem);
+		}
+		
+		s = random.nextInt(length);
+		t = random.nextInt(length);
+		while(s == t) {
+			t = random.nextInt(length);
+		}
+		long before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++ ) {
+			graphs.get(i).bfs(s, t);
+		}
+		System.out.println("图的广度优先搜索，一个图共有" + length + "个节点，从" + s + "查找到" + t + "的路径，依次遍历" + size + "个图耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++ ) {
+			graphs.get(i).dfs(s, t);
+		}
+		System.out.println("图的深度优先搜索，一个图共有" + length + "个节点，从" + s + "查找到" + t + "的路径，依次遍历" + size + "个图耗时" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
