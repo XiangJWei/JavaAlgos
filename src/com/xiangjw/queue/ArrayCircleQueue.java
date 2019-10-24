@@ -1,7 +1,7 @@
 package com.xiangjw.queue;
 
 /**
- * ÓÃÊı×éÊµÏÖµÄÑ­»·¶ÓÁĞ£¬¼È¿ÉÒÔ¿ØÖÆ´óĞ¡£¬ÓÖÄÜ±ÜÃâÄÚ´æµÄÆµ·±ÉêÇë£¬ÉñÆ÷
+ * ç”¨æ•°ç»„å®ç°çš„å¾ªç¯é˜Ÿåˆ—ï¼Œæ—¢å¯ä»¥æ§åˆ¶å¤§å°ï¼Œåˆèƒ½é¿å…å†…å­˜çš„é¢‘ç¹ç”³è¯·ï¼Œç¥å™¨
  * 
  * @author Administrator
  *
@@ -27,8 +27,8 @@ public class ArrayCircleQueue<T> {
 	public void push(T data) {
 		int next = getNext(startIndex);
 		if(next == endIndex) {
-			//¶ÓÁĞÒÑÂú
-			System.out.println("¶ÓÁĞÒÑÂú");
+			//é˜Ÿåˆ—å·²æ»¡
+			System.out.println("é˜Ÿåˆ—å·²æ»¡");
 			return;
 		}
 		
@@ -39,24 +39,24 @@ public class ArrayCircleQueue<T> {
 	
 	public T pull() {
 		if(startIndex == endIndex) {
-			System.out.println("¶ÓÁĞÒÑ¿Õ");
+			System.out.println("é˜Ÿåˆ—å·²ç©º");
 			return null;
 		}
 		
 		endIndex = getNext(endIndex);
-		T temp = arr[endIndex];//È¡µ½Î²Ö¸ÕëµÄÊı¾İ
-		arr[endIndex] = null;//¿ØÖÆÎ²Ö¸ÕëÊ¼ÖÕÖ¸Ïò¿Õ
+		T temp = arr[endIndex];//å–åˆ°å°¾æŒ‡é’ˆçš„æ•°æ®
+		arr[endIndex] = null;//æ§åˆ¶å°¾æŒ‡é’ˆå§‹ç»ˆæŒ‡å‘ç©º
 		length --;
 		return temp;
 	}
 	
 	public T get() {
 		if(startIndex == endIndex) {
-			System.out.println("¶ÓÁĞÒÑ¿Õ");
+			System.out.println("é˜Ÿåˆ—å·²ç©º");
 			return null;
 		}
 		
-		T temp = arr[getNext(endIndex)];//È¡µ½Î²Ö¸ÕëµÄÊı¾İ
+		T temp = arr[getNext(endIndex)];//å–åˆ°å°¾æŒ‡é’ˆçš„æ•°æ®
 		return temp;
 	}
 	
@@ -72,26 +72,26 @@ public class ArrayCircleQueue<T> {
 	
 	private boolean arrNotNull(int index) {
 		if(startIndex > endIndex) {
-			//ÆğµãÔÚÖÕµãÇ°Ãæ£¬ËµÃ÷Ã»ÓĞĞÎ³É»·£¬¿ØÖÆindexÔÚÆğµãºÍÖÕµãÖ®¼ä¼´¿É
+			//èµ·ç‚¹åœ¨ç»ˆç‚¹å‰é¢ï¼Œè¯´æ˜æ²¡æœ‰å½¢æˆç¯ï¼Œæ§åˆ¶indexåœ¨èµ·ç‚¹å’Œç»ˆç‚¹ä¹‹é—´å³å¯
 			return (index > endIndex && index <= startIndex);
 		}else if(startIndex < endIndex) {
-			//ÆğµãÔÚÖÕµãºóÃæ£¬ËµÃ÷ÒÑ¾­³ÉÁË»·£¬Ôò¿ØÖÆindex²»ÔÚÆğµãºÍÖÕµãÖ®¼ä
+			//èµ·ç‚¹åœ¨ç»ˆç‚¹åé¢ï¼Œè¯´æ˜å·²ç»æˆäº†ç¯ï¼Œåˆ™æ§åˆ¶indexä¸åœ¨èµ·ç‚¹å’Œç»ˆç‚¹ä¹‹é—´
 			return !(index > startIndex && index <= endIndex);
 		}else {
-			//ÆğµãºÍÖÕµã²»»áÏàµÈ£¬ÏàµÈ¾ÍÊÇ¿ÕµÄ¡£
+			//èµ·ç‚¹å’Œç»ˆç‚¹ä¸ä¼šç›¸ç­‰ï¼Œç›¸ç­‰å°±æ˜¯ç©ºçš„ã€‚
 			return false;
 		}
 	}
 	
 	public void print() {
-		System.out.print("Êı×éÕ¼ÓÃ¿Õ¼ä:" + sizeOfArr + "£¬Êı×éÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬¶ÓÁĞÎ²-->[");
+		System.out.print("æ•°ç»„å ç”¨ç©ºé—´:" + sizeOfArr + "ï¼Œæ•°ç»„å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œé˜Ÿåˆ—å°¾-->[");
 		int index = getNext(endIndex);
 		while(arrNotNull(index)) {
 			buffer.append(arr[index]).append(",");
 			index = getNext(index);
 		}
-		buffer.append("]-->¶ÓÁĞÍ·");
+		buffer.append("]-->é˜Ÿåˆ—å¤´");
 		
 		System.out.println(buffer.toString());
 	}

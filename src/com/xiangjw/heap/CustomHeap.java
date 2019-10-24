@@ -1,13 +1,13 @@
 package com.xiangjw.heap;
 
 /**
- * ´ó¶¥¶Ñ
+ * å¤§é¡¶å †
  * @author Administrator
  *
  */
 public class CustomHeap {
 
-	private int[] arr;//a[0]²»·ÅÔªËØ£¬±ãÓÚ¼ÆËã¸¸×Ó½Úµã
+	private int[] arr;//a[0]ä¸æ”¾å…ƒç´ ï¼Œä¾¿äºè®¡ç®—çˆ¶å­èŠ‚ç‚¹
 	private int length;
 	
 	public CustomHeap(int size) {
@@ -16,13 +16,13 @@ public class CustomHeap {
 	}
 	
 	/**
-	 * Ìí¼ÓÔªËØ£¬²¢¶Ñ»¯
+	 * æ·»åŠ å…ƒç´ ï¼Œå¹¶å †åŒ–
 	 * @param val
 	 */
 	public void add(int val) {
 		int index = length + 1;
 		if(index == arr.length) {
-			System.out.println("ÈİÁ¿ÒÑÂú");
+			System.out.println("å®¹é‡å·²æ»¡");
 			return;
 		}
 		
@@ -43,7 +43,7 @@ public class CustomHeap {
 	}
 	
 	/**
-	 * É¾³ı¶Ñ¶¥ÔªËØ£¬²¢¶Ñ»¯
+	 * åˆ é™¤å †é¡¶å…ƒç´ ï¼Œå¹¶å †åŒ–
 	 */
 	public void delTop() {
 		if(length == 0) {
@@ -78,7 +78,7 @@ public class CustomHeap {
 	}
 	
 	public void print() {
-		System.out.print("¶ÑµÄ´óĞ¡£º" + length + "-----");
+		System.out.print("å †çš„å¤§å°ï¼š" + length + "-----");
 		StringBuffer buffer = new StringBuffer();
 		for(int i = 1 ; i <= length ; i ++) {
 			if(i != 1) {

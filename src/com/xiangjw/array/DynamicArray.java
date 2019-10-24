@@ -103,8 +103,8 @@ public class DynamicArray<T> {
 	}
 	
 	public void print() {
-		System.out.print("Êı×éÕ¼ÓÃ¿Õ¼ä:" + sizeOfArr + "£¬Êı×éÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("æ•°ç»„å ç”¨ç©ºé—´:" + sizeOfArr + "ï¼Œæ•°ç»„å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		for(int i = 0 ; i < sizeOfArr ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i] == null ? "null" : arr[i].toString());

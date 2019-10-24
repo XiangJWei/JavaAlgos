@@ -6,15 +6,15 @@ public class ArrayTest {
 	
 	protected static void printArrAddr() {
 		int arr[] = new int[100];
-		System.out.println("Êı×éarrµØÖ·£º" + System.identityHashCode(arr));
-		System.out.println("Êı×éarr[0]µØÖ·£º" + System.identityHashCode(arr[0]));
-		System.out.println("Êı×éarr[10]µØÖ·£º" + System.identityHashCode(arr[10]));
+		System.out.println("æ•°ç»„arråœ°å€ï¼š" + System.identityHashCode(arr));
+		System.out.println("æ•°ç»„arr[0]åœ°å€ï¼š" + System.identityHashCode(arr[0]));
+		System.out.println("æ•°ç»„arr[10]åœ°å€ï¼š" + System.identityHashCode(arr[10]));
 	}
 	
 	private static int array[] = new int[10];
 	
 	/**
-	 * Êı×éÖĞ²åÈëÔªËØ
+	 * æ•°ç»„ä¸­æ’å…¥å…ƒç´ 
 	 * 
 	 * @param index
 	 * @param val
@@ -31,7 +31,7 @@ public class ArrayTest {
 	}
 	
 	/**
-	 * Êı×éÖĞÉ¾³ıÔªËØ
+	 * æ•°ç»„ä¸­åˆ é™¤å…ƒç´ 
 	 * @param index
 	 * @param val
 	 */
@@ -56,18 +56,18 @@ public class ArrayTest {
 			}
 		}
 		
-		System.out.println("Êı×éarray£º" + buffer.toString());
+		System.out.println("æ•°ç»„arrayï¼š" + buffer.toString());
 	}
 	
 	/**
-	 * Êı×éÔ½½ç²âÊÔ
+	 * æ•°ç»„è¶Šç•Œæµ‹è¯•
 	 */
 	private static void outOfBound() {
 		int i = 0;
 		int a[] = new int [3];
 		for(; i <= 3 ; i ++) {
 			a[i] = 0;
-			System.out.println("Êı×éa");
+			System.out.println("æ•°ç»„a");
 		}
 	}
 	

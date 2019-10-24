@@ -1,7 +1,5 @@
 package com.xiangjw.data;
 
-import java.util.Enumeration;
-
 import com.xiangjw.array.ArrayTest;
 
 enum UserType{
@@ -13,13 +11,13 @@ enum UserType{
 public class DataTest extends ArrayTest{
 
 	public static void main(String []args) {
-		System.out.println("Byte£º" + Byte.SIZE + "," + Byte.MIN_VALUE  + "," + Byte.MAX_VALUE);
-		System.out.println("Char£º" + Character.SIZE + "," + Character.MIN_VALUE  + "," + Character.MAX_VALUE);
-		System.out.println("Short£º" + Short.SIZE + "," + Short.MIN_VALUE  + "," + Short.MAX_VALUE);
-		System.out.println("Integer£º" + Integer.SIZE + "," + Integer.MIN_VALUE  + "," + Integer.MAX_VALUE);
-		System.out.println("Double£º" + Double.SIZE + "," + Double.MIN_VALUE  + "," + Double.MAX_VALUE);
-		System.out.println("Float£º" + Float.SIZE + "," + Float.MIN_VALUE  + "," + Float.MAX_VALUE);
-		System.out.println("Double£º" + Double.SIZE + "," + Double.MIN_VALUE  + "," + Double.MAX_VALUE);
+		System.out.println("Byteï¼š" + Byte.SIZE + "," + Byte.MIN_VALUE  + "," + Byte.MAX_VALUE);
+		System.out.println("Charï¼š" + Character.SIZE + "," + Character.MIN_VALUE  + "," + Character.MAX_VALUE);
+		System.out.println("Shortï¼š" + Short.SIZE + "," + Short.MIN_VALUE  + "," + Short.MAX_VALUE);
+		System.out.println("Integerï¼š" + Integer.SIZE + "," + Integer.MIN_VALUE  + "," + Integer.MAX_VALUE);
+		System.out.println("Doubleï¼š" + Double.SIZE + "," + Double.MIN_VALUE  + "," + Double.MAX_VALUE);
+		System.out.println("Floatï¼š" + Float.SIZE + "," + Float.MIN_VALUE  + "," + Float.MAX_VALUE);
+		System.out.println("Doubleï¼š" + Double.SIZE + "," + Double.MIN_VALUE  + "," + Double.MAX_VALUE);
 		
 		switch("abc") {
 		case "abc":

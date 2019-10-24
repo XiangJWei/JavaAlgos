@@ -10,14 +10,14 @@ import com.xiangjw.linkedlist.CustomLinkedList;
 import com.xiangjw.queue.ArrayQuene;
 
 /**
- * ÕâÊÇÒ»¸öÎŞÏòÍ¼
- * ÕâÀï³öÓÚ¼òµ¥¿¼ÂÇÓÃµÄÊı×é¼ÓÁ´±íÀ´´æ´¢¡£
- * Èç¹ûĞèÒª¸ü¸ßµÄ²éÑ¯Ğ§ÂÊ£¬¿ÉÒÔÊ¹ÓÃÊı×é¼Ó£¨Ìø±í¡¢É¢ÁĞ±í¡¢ºìºÚÊ÷µÈ£©
+ * è¿™æ˜¯ä¸€ä¸ªæ— å‘å›¾
+ * è¿™é‡Œå‡ºäºç®€å•è€ƒè™‘ç”¨çš„æ•°ç»„åŠ é“¾è¡¨æ¥å­˜å‚¨ã€‚
+ * å¦‚æœéœ€è¦æ›´é«˜çš„æŸ¥è¯¢æ•ˆç‡ï¼Œå¯ä»¥ä½¿ç”¨æ•°ç»„åŠ ï¼ˆè·³è¡¨ã€æ•£åˆ—è¡¨ã€çº¢é»‘æ ‘ç­‰ï¼‰
  * @author Administrator
  *
  */
 public class CustomGraph {
-	private DynamicArray<CustomLinkedList<Integer>> graph;//ÁÚ½Ó±í£¬±íÊ¾Í¼
+	private DynamicArray<CustomLinkedList<Integer>> graph;//é‚»æ¥è¡¨ï¼Œè¡¨ç¤ºå›¾
 	
 	public CustomGraph(int size){
 		graph = new DynamicArray<CustomLinkedList<Integer>>(size);
@@ -30,9 +30,9 @@ public class CustomGraph {
 	}
 	
 	/**
-	 * ¸øÍ¼Ìí¼ÓÒ»Ìõ¹ØÏµ±ß
-	 * @param s ´ÓÄÄ¸ö½Úµã
-	 * @param t µ½ÄÄ¸ö½Úµã
+	 * ç»™å›¾æ·»åŠ ä¸€æ¡å…³ç³»è¾¹
+	 * @param s ä»å“ªä¸ªèŠ‚ç‚¹
+	 * @param t åˆ°å“ªä¸ªèŠ‚ç‚¹
 	 */
 	public void addEdge(int s , int t) {
 		if(s >= graph.getLength() || t >= graph.getLength()) {
@@ -49,14 +49,14 @@ public class CustomGraph {
 	
 	
 	/**
-	 * ¹ã¶ÈÓÅÏÈËÑË÷
-	 * @param s ÆğÊ¼µã
-	 * @param t ÖÕµã
+	 * å¹¿åº¦ä¼˜å…ˆæœç´¢
+	 * @param s èµ·å§‹ç‚¹
+	 * @param t ç»ˆç‚¹
 	 */
 	public CustomArray bfs(int s , int t) {
 		ArrayQuene<CustomLinkedList<Integer>> queue = new ArrayQuene<CustomLinkedList<Integer>>(graph.getLength());
-		CustomArray visited = new CustomArray(graph.getLength());//³õÊ¼È«-1,¼ÇÂ¼ÒÑ¾­±»·ÃÎÊµÄ¶©µ¥£¬±ÜÃâ±»ÖØ¸´·ÃÎÊ
-		CustomArray prev = new CustomArray(graph.getLength());//³õÊ¼È«-1£¬¼ÇÂ¼Ä³½ÚµãµÄÉÏÒ»¸ö½Úµã
+		CustomArray visited = new CustomArray(graph.getLength());//åˆå§‹å…¨-1,è®°å½•å·²ç»è¢«è®¿é—®çš„è®¢å•ï¼Œé¿å…è¢«é‡å¤è®¿é—®
+		CustomArray prev = new CustomArray(graph.getLength());//åˆå§‹å…¨-1ï¼Œè®°å½•æŸèŠ‚ç‚¹çš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹
 		
 		for(int i = 0 ; i < graph.getLength() ; i ++) {
 			visited.add(-1);
@@ -64,7 +64,7 @@ public class CustomGraph {
 		}
 		
 		visited.set(s, 1);
-		queue.push(graph.findByIndex(s));//ÆğÊ¼µãÈë¶ÓÁĞ
+		queue.push(graph.findByIndex(s));//èµ·å§‹ç‚¹å…¥é˜Ÿåˆ—
 		boolean isOk = false;
 		while(queue.getLength() > 0 && !isOk) {
 			CustomLinkedList<Integer> curr = queue.pull();
@@ -73,9 +73,9 @@ public class CustomGraph {
 				Integer temp = curr.get(i);
 				
 				if(temp.intValue() == t) {
-					//ÕÒµ½À²
+					//æ‰¾åˆ°å•¦
 					prev.set(temp, curr.getFirst());
-					isOk = true;//ÍË³öË«ÖØÑ­»·
+					isOk = true;//é€€å‡ºåŒé‡å¾ªç¯
 					break;
 				}
 				
@@ -92,13 +92,13 @@ public class CustomGraph {
 	}
 	
 	/**
-	 * Éî¶ÈÓÅÏÈËÑË÷
-	 * @param s ÆğÊ¼µã
-	 * @param t ÖÕµã
+	 * æ·±åº¦ä¼˜å…ˆæœç´¢
+	 * @param s èµ·å§‹ç‚¹
+	 * @param t ç»ˆç‚¹
 	 */
 	public CustomArray dfs(int s , int t) {
-		CustomArray visited = new CustomArray(graph.getLength());//³õÊ¼È«-1,¼ÇÂ¼ÒÑ¾­±»·ÃÎÊµÄ¶©µ¥£¬±ÜÃâ±»ÖØ¸´·ÃÎÊ
-		CustomArray prev = new CustomArray(graph.getLength());//³õÊ¼È«-1£¬¼ÇÂ¼Ä³½ÚµãµÄÉÏÒ»¸ö½Úµã
+		CustomArray visited = new CustomArray(graph.getLength());//åˆå§‹å…¨-1,è®°å½•å·²ç»è¢«è®¿é—®çš„è®¢å•ï¼Œé¿å…è¢«é‡å¤è®¿é—®
+		CustomArray prev = new CustomArray(graph.getLength());//åˆå§‹å…¨-1ï¼Œè®°å½•æŸèŠ‚ç‚¹çš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹
 		
 		for(int i = 0 ; i < graph.getLength() ; i ++) {
 			visited.add(-1);
@@ -125,12 +125,12 @@ public class CustomGraph {
 			}
 			
 			if(visited.findByIndex(temp) == -1) {
-				prev.set(temp, curr);//±ê¼ÇÉÏÒ»ÈÎµÄ¹ØÏµ
-				visited.set(temp, 1);//±ê¼Ç½ÚµãÒÑ·ÃÎÊ£¬ÏÂ´ÎÔÙµ½Ëü¾Í²»½øÀ´ÁË
+				prev.set(temp, curr);//æ ‡è®°ä¸Šä¸€ä»»çš„å…³ç³»
+				visited.set(temp, 1);//æ ‡è®°èŠ‚ç‚¹å·²è®¿é—®ï¼Œä¸‹æ¬¡å†åˆ°å®ƒå°±ä¸è¿›æ¥äº†
 				
 				boolean isOk = dfs(visited , prev , temp , t);
 				if(isOk) {
-					return true;//µ±×Óµİ¹éÀïÕÒµ½Ä¿±ê½ÚµãÊ±£¬¾Í²»ÔÙ½øĞĞ±¾µİ¹éÖĞ»¹Î´Íê³ÉµÄÑ­»·ÁË£¬Ö±½Ó·µ»Ø¡£
+					return true;//å½“å­é€’å½’é‡Œæ‰¾åˆ°ç›®æ ‡èŠ‚ç‚¹æ—¶ï¼Œå°±ä¸å†è¿›è¡Œæœ¬é€’å½’ä¸­è¿˜æœªå®Œæˆçš„å¾ªç¯äº†ï¼Œç›´æ¥è¿”å›ã€‚
 				}
 			}
 		}
@@ -140,7 +140,7 @@ public class CustomGraph {
 	
 	public static void printBfs(CustomArray prev , int s , int t , int k) {
 		if(prev.findByIndex(t) == -1) {
-			System.out.print("ÎŞ¿É´ïÂ·¾¶");
+			System.out.print("æ— å¯è¾¾è·¯å¾„");
 			return;
 		}
 		if(k == s) {
@@ -153,9 +153,9 @@ public class CustomGraph {
 	}
 	
 	public void print() {
-		System.out.println("´òÓ¡Í¼µÄĞÅÏ¢ÈçÏÂ");
+		System.out.println("æ‰“å°å›¾çš„ä¿¡æ¯å¦‚ä¸‹");
 		for(int i = 0 ; i < graph.getLength() ; i ++) {
-			System.out.print("½Úµã" + i + ":");
+			System.out.print("èŠ‚ç‚¹" + i + ":");
 			graph.findByIndex(i).print();
 		}
 	}
@@ -178,12 +178,12 @@ public class CustomGraph {
 		int s = 0;
 		int t = 6;
 		CustomArray prev = graph.bfs(s , t);
-		System.out.println("¹ã¶ÈÓÅÏÈËÑË÷£¬Çó" + s + "µ½" + t + "×î¶ÌµÄÂ·¾¶ÈçÏÂ");
+		System.out.println("å¹¿åº¦ä¼˜å…ˆæœç´¢ï¼Œæ±‚" + s + "åˆ°" + t + "æœ€çŸ­çš„è·¯å¾„å¦‚ä¸‹");
 		printBfs(prev , s , t , t);
 		System.out.println("");
 		
 		prev = graph.dfs(s , t);
-		System.out.println("Éî¶ÈÓÅÏÈËÑË÷£¬Çó" + s + "µ½" + t + "ÕÒµ½µÄÂ·¾¶ÈçÏÂ");
+		System.out.println("æ·±åº¦ä¼˜å…ˆæœç´¢ï¼Œæ±‚" + s + "åˆ°" + t + "æ‰¾åˆ°çš„è·¯å¾„å¦‚ä¸‹");
 		printBfs(prev , s , t , t);
 		System.out.println("");
 		
@@ -208,12 +208,12 @@ public class CustomGraph {
 		for(int i = 0 ; i < size ; i ++ ) {
 			graphs.get(i).bfs(s, t);
 		}
-		System.out.println("Í¼µÄ¹ã¶ÈÓÅÏÈËÑË÷£¬Ò»¸öÍ¼¹²ÓĞ" + length + "¸ö½Úµã£¬´Ó" + s + "²éÕÒµ½" + t + "µÄÂ·¾¶£¬ÒÀ´Î±éÀú" + size + "¸öÍ¼ºÄÊ±" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("å›¾çš„å¹¿åº¦ä¼˜å…ˆæœç´¢ï¼Œä¸€ä¸ªå›¾å…±æœ‰" + length + "ä¸ªèŠ‚ç‚¹ï¼Œä»" + s + "æŸ¥æ‰¾åˆ°" + t + "çš„è·¯å¾„ï¼Œä¾æ¬¡éå†" + size + "ä¸ªå›¾è€—æ—¶" + (System.currentTimeMillis() - before) + "ms");
 		
 		before = System.currentTimeMillis();
 		for(int i = 0 ; i < size ; i ++ ) {
 			graphs.get(i).dfs(s, t);
 		}
-		System.out.println("Í¼µÄÉî¶ÈÓÅÏÈËÑË÷£¬Ò»¸öÍ¼¹²ÓĞ" + length + "¸ö½Úµã£¬´Ó" + s + "²éÕÒµ½" + t + "µÄÂ·¾¶£¬ÒÀ´Î±éÀú" + size + "¸öÍ¼ºÄÊ±" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("å›¾çš„æ·±åº¦ä¼˜å…ˆæœç´¢ï¼Œä¸€ä¸ªå›¾å…±æœ‰" + length + "ä¸ªèŠ‚ç‚¹ï¼Œä»" + s + "æŸ¥æ‰¾åˆ°" + t + "çš„è·¯å¾„ï¼Œä¾æ¬¡éå†" + size + "ä¸ªå›¾è€—æ—¶" + (System.currentTimeMillis() - before) + "ms");
 	}
 }

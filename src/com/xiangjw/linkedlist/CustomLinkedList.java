@@ -119,8 +119,8 @@ public class CustomLinkedList<T> {
 	
 	
 	/**
-	 * ÊÇ·ñÊÇ»ØĞÎ´®
-	 * ¼´ 12321
+	 * æ˜¯å¦æ˜¯å›å½¢ä¸²
+	 * å³ 12321
 	 */
 	public boolean isPalindrome() {
 		if(firstNode == null) {
@@ -130,7 +130,7 @@ public class CustomLinkedList<T> {
 			return true;
 		}
 		
-		//Ê¹ÓÃ¿ìÂıÖ¸Õë,ÕÒµ½ÖĞ¼ä½Úµã
+		//ä½¿ç”¨å¿«æ…¢æŒ‡é’ˆ,æ‰¾åˆ°ä¸­é—´èŠ‚ç‚¹
 		Node p = firstNode;
 		Node q = firstNode;
 		
@@ -138,12 +138,12 @@ public class CustomLinkedList<T> {
 		Node newListRight = null;
 		while(q != null) {
 			if(q.getNext() == null) {
-				//»ùÊıĞĞÊı
+				//åŸºæ•°è¡Œæ•°
 				leftLast = p;
 				newListRight = p;
 				break;
 			}else if(q.getNext().getNext() == null) {
-				//Å¼ÊıĞĞÊı
+				//å¶æ•°è¡Œæ•°
 				leftLast = p;
 				newListRight = p.getNext();
 				break;
@@ -153,7 +153,7 @@ public class CustomLinkedList<T> {
 		}
 		
 		if(leftLast != null && newListRight != null) {
-			//°Ñ×ó°ë±ßË³Ğò·­×ª£¬´´½¨Ò»¸öĞÂµÄÁ´±í£¬ÓÒ°ë±ßÎ¬³Ö²»±ä
+			//æŠŠå·¦åŠè¾¹é¡ºåºç¿»è½¬ï¼Œåˆ›å»ºä¸€ä¸ªæ–°çš„é“¾è¡¨ï¼Œå³åŠè¾¹ç»´æŒä¸å˜
 			Node start = firstNode;
 			Node newListLeft = null;
 			while(start != leftLast) {
@@ -169,7 +169,7 @@ public class CustomLinkedList<T> {
 			Node temp = new Node(start.getData(), newListLeft);
 			newListLeft = temp;
 			
-			//¶Ô±ÈnewListLeftºÍnewListRight
+			//å¯¹æ¯”newListLeftå’ŒnewListRight
 			Node pLeft = newListLeft;
 			Node pRight = newListRight;
 			while(pLeft != null && pRight != null) {
@@ -188,8 +188,8 @@ public class CustomLinkedList<T> {
 	}
 	
 	public void print() {
-		System.out.print("ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		Node p = firstNode;
 		while (p != null) {
 			buffer.append(p.getData() == null ? "null" : p.getData().toString()).append(",");
@@ -239,7 +239,7 @@ public class CustomLinkedList<T> {
 		list.addToLast('f');
 		list.print();
 		
-		System.out.println("ÊÇ»ØĞÎ´®Âğ£¿  " + list.isPalindrome());
+		System.out.println("æ˜¯å›å½¢ä¸²å—ï¼Ÿ  " + list.isPalindrome());
 		list.print();
 		
 		list.removeLast();list.print();

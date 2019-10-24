@@ -41,10 +41,10 @@ public class CustomTree<T> {
 	}
 	
 	/**
-	 * Ç°Ğò±éÀú
+	 * å‰åºéå†
 	 */
 	public void printBefore(){
-		System.out.print("Ç°Ğò±éÀú£º");
+		System.out.print("å‰åºéå†ï¼š");
 		printBefore(rootTree);
 		System.out.println("");
 	}
@@ -62,10 +62,10 @@ public class CustomTree<T> {
 	}
 	
 	/**
-	 * ÖĞĞò±éÀú
+	 * ä¸­åºéå†
 	 */
 	public void printMiddle(){
-		System.out.print("ÖĞĞò±éÀú£º");
+		System.out.print("ä¸­åºéå†ï¼š");
 		printMiddle(rootTree);
 		System.out.println("");
 	}
@@ -82,10 +82,10 @@ public class CustomTree<T> {
 	}
 	
 	/**
-	 * ºóĞò±éÀú
+	 * ååºéå†
 	 */
 	public void printAfter(){
-		System.out.print("ºóĞò±éÀú£º");
+		System.out.print("ååºéå†ï¼š");
 		printAfter(rootTree);
 		System.out.println("");
 	}
@@ -104,10 +104,10 @@ public class CustomTree<T> {
 	}
 	
 	/**
-	 * °´²ã´Î±éÀú
+	 * æŒ‰å±‚æ¬¡éå†
 	 */
 	public void printLayer() {
-		System.out.print("°´²ã´Î±éÀú£º");
+		System.out.print("æŒ‰å±‚æ¬¡éå†ï¼š");
 		printLayer(rootTree);
 		System.out.println("");
 	}

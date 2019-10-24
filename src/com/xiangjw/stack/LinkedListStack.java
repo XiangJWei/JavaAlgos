@@ -1,7 +1,7 @@
 package com.xiangjw.stack;
 
 /**
- * Á´±íÊµÏÖÕ»   Í·²åÍ·É¾
+ * é“¾è¡¨å®ç°æ ˆ   å¤´æ’å¤´åˆ 
  * @author Administrator
  *
  * @param <T>
@@ -35,14 +35,14 @@ public class LinkedListStack<T> {
 	}
 	
 	public void print() {
-		System.out.print("ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬Õ»¶¥<--[");
+		System.out.print("å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œæ ˆé¡¶<--[");
 		Node p = firstNode.getNext();
 		while (p != null) {
 			buffer.append(p.getData() == null ? "null" : p.getData().toString()).append(",");
 			p = p.getNext();
 		}
-		buffer.append("]<--Õ»µ×");
+		buffer.append("]<--æ ˆåº•");
 		
 		System.out.println(buffer.toString());
 	}

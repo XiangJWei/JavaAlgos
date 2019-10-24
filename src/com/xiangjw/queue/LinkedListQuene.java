@@ -1,7 +1,7 @@
 package com.xiangjw.queue;
 
 /**
- * Á´±íÊµÏÖ¶ÓÁĞ£¬Î²²åÈë£¬Í·É¾³ı¡£Î¬»¤Á½¸öÖ¸Õë¼´¿É
+ * é“¾è¡¨å®ç°é˜Ÿåˆ—ï¼Œå°¾æ’å…¥ï¼Œå¤´åˆ é™¤ã€‚ç»´æŠ¤ä¸¤ä¸ªæŒ‡é’ˆå³å¯
  * 
  * @author Administrator
  *
@@ -40,14 +40,14 @@ public class LinkedListQuene<T> {
 	}
 	
 	public void print() {
-		System.out.print("ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬¶ÓÁĞÎ²-->[");
+		System.out.print("å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œé˜Ÿåˆ—å°¾-->[");
 		Node p = firstNode.getNext();
 		while (p != null) {
 			buffer.append(p.getData() == null ? "null" : p.getData().toString()).append(",");
 			p = p.getNext();
 		}
-		buffer.append("]-->¶ÓÁĞÍ·");
+		buffer.append("]-->é˜Ÿåˆ—å¤´");
 		
 		System.out.println(buffer.toString());
 	}

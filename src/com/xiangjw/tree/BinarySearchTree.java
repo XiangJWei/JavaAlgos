@@ -1,9 +1,9 @@
 package com.xiangjw.tree;
 
 /**
- * ¶ş²æ²éÕÒÊ÷
- * ¶ş²æ²éÕÒÊ÷ÒªÇó£¬ÔÚÊ÷ÖĞµÄÈÎÒâÒ»¸ö½Úµã£¬Æä×ó×ÓÊ÷ÖĞµÄÃ¿¸ö½ÚµãµÄÖµ£¬¶¼ÒªĞ¡ÓÚÕâ¸ö½ÚµãµÄÖµ£¬¶øÓÒ×ÓÊ÷½ÚµãµÄÖµ¶¼´óÓÚÕâ¸ö½ÚµãµÄÖµ¡£
- * Èç¹ûÊ÷µÄ×óÓÒÁ½¶ËÆ½ºâ£¬ÄÇÃ´Ê±¼ä¸´ÔÓ¶È½Ó½üÓÚO(logN),¼«¶ËÇé¿öÊ±¶¼ÔÚÒ»¶Ë£¬ÄÇÃ´Ê±¼ä¸´ÔÓ¶ÈÍË»¯ÎªO(n)
+ * äºŒå‰æŸ¥æ‰¾æ ‘
+ * äºŒå‰æŸ¥æ‰¾æ ‘è¦æ±‚ï¼Œåœ¨æ ‘ä¸­çš„ä»»æ„ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå…¶å·¦å­æ ‘ä¸­çš„æ¯ä¸ªèŠ‚ç‚¹çš„å€¼ï¼Œéƒ½è¦å°äºè¿™ä¸ªèŠ‚ç‚¹çš„å€¼ï¼Œè€Œå³å­æ ‘èŠ‚ç‚¹çš„å€¼éƒ½å¤§äºè¿™ä¸ªèŠ‚ç‚¹çš„å€¼ã€‚
+ * å¦‚æœæ ‘çš„å·¦å³ä¸¤ç«¯å¹³è¡¡ï¼Œé‚£ä¹ˆæ—¶é—´å¤æ‚åº¦æ¥è¿‘äºO(logN),æç«¯æƒ…å†µæ—¶éƒ½åœ¨ä¸€ç«¯ï¼Œé‚£ä¹ˆæ—¶é—´å¤æ‚åº¦é€€åŒ–ä¸ºO(n)
  * @author Administrator
  *
  */
@@ -18,7 +18,7 @@ public class BinarySearchTree {
 	}
 	
 	/**
-	 * Ìí¼ÓÊ÷½Úµã
+	 * æ·»åŠ æ ‘èŠ‚ç‚¹
 	 * @param val
 	 */
 	public void add(int val) {
@@ -50,7 +50,7 @@ public class BinarySearchTree {
 	}
 	
 	/**
-	 * É¾³ıÊ÷½Úµã
+	 * åˆ é™¤æ ‘èŠ‚ç‚¹
 	 * @param parent
 	 * @param target
 	 * @param val
@@ -66,7 +66,7 @@ public class BinarySearchTree {
 		
 		if(target.data == val) {
 			if(target.left == null && target.right == null) {
-				//Ã»ÓĞ×Ó½Úµã£¬Ö±½ÓÉ¾³ıµ±Ç°½Úµã
+				//æ²¡æœ‰å­èŠ‚ç‚¹ï¼Œç›´æ¥åˆ é™¤å½“å‰èŠ‚ç‚¹
 				if(parent == null) {
 					root = null;
 					length --;
@@ -80,12 +80,12 @@ public class BinarySearchTree {
 				}
 				length --;
 			}else if(target.left != null && target.right != null) {
-				//ÓĞÁ½¸ö×Ó½Úµã£¬Ñ¡È¡×ó×Ó½ÚµãÖĞ×î´óµÄÒ»¸ö£¬»»µ½µ±Ç°½Úµã
+				//æœ‰ä¸¤ä¸ªå­èŠ‚ç‚¹ï¼Œé€‰å–å·¦å­èŠ‚ç‚¹ä¸­æœ€å¤§çš„ä¸€ä¸ªï¼Œæ¢åˆ°å½“å‰èŠ‚ç‚¹
 				TreeNode tempParent = target;
 				target.data = getMax(tempParent , target.left , true);
 				length --;
 			}else if(target.left != null){
-				//ÓĞÒ»¸ö×ó×Ó½Úµã
+				//æœ‰ä¸€ä¸ªå·¦å­èŠ‚ç‚¹
 				if(parent == null) {
 					root = target.left;
 				}else if(parent.data > val) {
@@ -95,7 +95,7 @@ public class BinarySearchTree {
 				}
 				length --;
 			}else {
-				//ÓĞÒ»¸öÓÒ×Ó½Úµã
+				//æœ‰ä¸€ä¸ªå³å­èŠ‚ç‚¹
 				if(parent == null) {
 					root = target.right;
 				}else if(parent.data > val) {
@@ -147,7 +147,7 @@ public class BinarySearchTree {
 	}
 	
 	/**
-	 * ²éÕÒÊ÷
+	 * æŸ¥æ‰¾æ ‘
 	 * @param val
 	 * @return
 	 */
@@ -184,11 +184,11 @@ public class BinarySearchTree {
 	}
 	
 	/**
-	 * ´òÓ¡Ê÷
+	 * æ‰“å°æ ‘
 	 */
 	public void print() {
 		print(root);
-		System.out.println(" length:" + length + " Ê÷µÄ¸ß¶È£º" + getTreeWeight(root));
+		System.out.println(" length:" + length + " æ ‘çš„é«˜åº¦ï¼š" + getTreeWeight(root));
 	}
 	
 	private void print(TreeNode tree) {
@@ -202,7 +202,7 @@ public class BinarySearchTree {
 	}
 	
 	/**
-	 * »ñÈ¡Ê÷µÄ¸ß¶È
+	 * è·å–æ ‘çš„é«˜åº¦
 	 * @param target
 	 * @return
 	 */
@@ -241,7 +241,7 @@ public class BinarySearchTree {
 		tree.add(4);tree.print();
 		
 		TreeNode[] searchResult = tree.find(5);
-		System.out.print("²éÕÒ½á¹û£º");
+		System.out.print("æŸ¥æ‰¾ç»“æœï¼š");
 		for(int i = 0 ; i < searchResult.length ; i ++) {
 			if(searchResult[i] != null) {
 				System.out.print(searchResult[i].data + ",");

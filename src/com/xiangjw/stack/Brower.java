@@ -2,10 +2,10 @@ package com.xiangjw.stack;
 
 public class Brower {
 
-	//Ê±¿Ì±£³ÖbackStackµÄÕ»¶¥Îªµ±Ç°·ÃÎÊµÄÒ³Ãæ
-	private ArrayStack<String> backStack;//ºóÍËµÄÊı¾İÕ»
+	//æ—¶åˆ»ä¿æŒbackStackçš„æ ˆé¡¶ä¸ºå½“å‰è®¿é—®çš„é¡µé¢
+	private ArrayStack<String> backStack;//åé€€çš„æ•°æ®æ ˆ
 	
-	private ArrayStack<String> frontStack;//Ç°½øµÄÊı¾İÕ»
+	private ArrayStack<String> frontStack;//å‰è¿›çš„æ•°æ®æ ˆ
 	
 	public Brower() {
 		backStack = new ArrayStack<String>(10);
@@ -13,35 +13,35 @@ public class Brower {
 	}
 	
 	public void open(String url) {
-		System.out.println("·ÃÎÊ--->" + url);
+		System.out.println("è®¿é—®--->" + url);
 		backStack.push(url);
 	}
 	
 	/**
-	 * ºóÍË
+	 * åé€€
 	 */
 	public void back() {
 		if(backStack.getLength() <= 1) {
-			System.out.println("ÍËÎŞ¿ÉÍË");
+			System.out.println("é€€æ— å¯é€€");
 			return;
 		}
 		
 		String info = backStack.pull();
-		System.out.println("»ØÍË·ÃÎÊ--->" + backStack.get());
+		System.out.println("å›é€€è®¿é—®--->" + backStack.get());
 		frontStack.push(info);
 	}
 	
 	/**
-	 * Ç°½ø
+	 * å‰è¿›
 	 */
 	public void forward() {
 		if(frontStack.getLength() == 0) {
-			System.out.println("½øÎŞ¿É½ø");
+			System.out.println("è¿›æ— å¯è¿›");
 			return;
 		}
 		
 		String info = frontStack.pull();
-		System.out.println("Ç°½ø·ÃÎÊ--->" + info);
+		System.out.println("å‰è¿›è®¿é—®--->" + info);
 		backStack.push(info);
 	}
 	

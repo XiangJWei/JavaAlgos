@@ -1,8 +1,8 @@
 package com.xiangjw.queue;
 
 /**
- * Êı×éÊµÏÖ¶ÓÁĞ
- * Î²²åÈë£¬Í·É¾³ı£¨Âß¼­É¾³ı£¬Êı×éÄÚÈİÒÀÈ»´æÔÚ£¬Ö»ÊÇÖ¸Õë±äÁË£¬Ì¯»¹Ê±¼ä¸´ÔÓ¶ÈO(1)£©
+ * æ•°ç»„å®ç°é˜Ÿåˆ—
+ * å°¾æ’å…¥ï¼Œå¤´åˆ é™¤ï¼ˆé€»è¾‘åˆ é™¤ï¼Œæ•°ç»„å†…å®¹ä¾ç„¶å­˜åœ¨ï¼Œåªæ˜¯æŒ‡é’ˆå˜äº†ï¼Œæ‘Šè¿˜æ—¶é—´å¤æ‚åº¦O(1)ï¼‰
  * 
  * @author Administrator
  *
@@ -65,18 +65,18 @@ public class ArrayQuene<T> {
 	
 	public void resize(int size) {
 		T[] temp = (T[])new Object[size];
-		System.arraycopy(arr, firstIndex, temp, 0, length);//ÕâÀïÓĞ¸öÎ»ÒÆ
+		System.arraycopy(arr, firstIndex, temp, 0, length);//è¿™é‡Œæœ‰ä¸ªä½ç§»
 		arr = temp;
 		sizeOfArr = size;
 		
-		//ÒÆ¶¯Êı×éºó£¬ĞèÖØĞÂÉèÖÃÆğÖ¹Ö¸Õë
+		//ç§»åŠ¨æ•°ç»„åï¼Œéœ€é‡æ–°è®¾ç½®èµ·æ­¢æŒ‡é’ˆ
 		firstIndex = 0;
 		lastIndex = length -1;
 	}
 	
 	public void print() {
-		System.out.print("Êı×éÕ¼ÓÃ¿Õ¼ä:" + sizeOfArr + "£¬Êı×éÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬¶ÓÁĞÎ²-->[");
+		System.out.print("æ•°ç»„å ç”¨ç©ºé—´:" + sizeOfArr + "ï¼Œæ•°ç»„å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œé˜Ÿåˆ—å°¾-->[");
 		for(int i = 0 ; i < sizeOfArr ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i]);
@@ -84,7 +84,7 @@ public class ArrayQuene<T> {
 				buffer.append(",").append(arr[i]);
 			}
 		}
-		buffer.append("]-->¶ÓÁĞÍ·");
+		buffer.append("]-->é˜Ÿåˆ—å¤´");
 		
 		System.out.println(buffer.toString());
 	}

@@ -1,7 +1,7 @@
 package com.xiangjw.stack;
 
 /**
- * Êı×éÊµÏÖÕ»£¬Î²²åÎ²É¾
+ * æ•°ç»„å®ç°æ ˆï¼Œå°¾æ’å°¾åˆ 
  * @author Administrator
  *
  * @param <T>
@@ -21,7 +21,7 @@ public class ArrayStack<T> {
 	}
 	
 	public void push(T data) {
-		//À©Èİ
+		//æ‰©å®¹
 		if(length == sizeOfArr) {
 			resize(sizeOfArr << 1);
 		}
@@ -38,7 +38,7 @@ public class ArrayStack<T> {
 		T temp = arr[-- length];
 		arr[length] = null;
 		
-		//ËõÈİ
+		//ç¼©å®¹
 		if(sizeOfArr > 1 && sizeOfArr > length << 1) {
 			resize(sizeOfArr >> 1);
 		}
@@ -66,8 +66,8 @@ public class ArrayStack<T> {
 	}
 	
 	public void print() {
-		System.out.print("Êı×éÕ¼ÓÃ¿Õ¼ä:" + sizeOfArr + "£¬Êı×éÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬Õ»µ×-->[");
+		System.out.print("æ•°ç»„å ç”¨ç©ºé—´:" + sizeOfArr + "ï¼Œæ•°ç»„å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œæ ˆåº•-->[");
 		for(int i = 0 ; i < sizeOfArr ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i]);
@@ -75,7 +75,7 @@ public class ArrayStack<T> {
 				buffer.append(",").append(arr[i]);
 			}
 		}
-		buffer.append("]-->Õ»¶¥");
+		buffer.append("]-->æ ˆé¡¶");
 		
 		System.out.println(buffer.toString());
 	}

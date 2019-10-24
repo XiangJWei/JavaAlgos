@@ -5,7 +5,7 @@ import java.util.Random;
 public class SearchTest {
 
 	/**
-	 * Ñ­»·µÄ·½Ê½ÊµÏÖ¶ş·Ö²éÕÒ
+	 * å¾ªç¯çš„æ–¹å¼å®ç°äºŒåˆ†æŸ¥æ‰¾
 	 * @param arr
 	 * @param length
 	 * @param value
@@ -32,7 +32,7 @@ public class SearchTest {
 	}
 	
 	/**
-	 * µİ¹éµÄ·½Ê½ÊµÏÖ¶ş·Ö²éÕÒ
+	 * é€’å½’çš„æ–¹å¼å®ç°äºŒåˆ†æŸ¥æ‰¾
 	 * @param arr
 	 * @param start
 	 * @param end
@@ -59,7 +59,7 @@ public class SearchTest {
 	
 	
 	/**
-	 * ²éÕÒµÚÒ»¸öÖµµÈÓÚ¸ø¶¨ÖµµÄÔªËØ
+	 * æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå€¼ç­‰äºç»™å®šå€¼çš„å…ƒç´ 
 	 * @return
 	 */
 	public static int getFirstSearch(int[] arr , int start , int end , int value) {
@@ -73,10 +73,10 @@ public class SearchTest {
 		int mid = start + ((end - start) >> 1);
 		if(arr[mid] == value) {
 			if(mid > start && arr[mid - 1] == value) {
-				//ÖĞ¼äÖµµÄÇ°Ò»¸öÒ²ÊÇÕâ¸öÖµ£¬ËùÒÔ¾Í¼ÌĞøÍùÏÂÕÒ
+				//ä¸­é—´å€¼çš„å‰ä¸€ä¸ªä¹Ÿæ˜¯è¿™ä¸ªå€¼ï¼Œæ‰€ä»¥å°±ç»§ç»­å¾€ä¸‹æ‰¾
 				return getFirstSearch(arr , start , mid - 1 , value);
 			}else {
-				//ÖĞ¼äÖµµÄÇ°Ò»¸ö²»ÊÇÕâ¸öÖµ£¬ËµÃ÷mid¾ÍÊÇµÚÒ»¸öÖµÁË
+				//ä¸­é—´å€¼çš„å‰ä¸€ä¸ªä¸æ˜¯è¿™ä¸ªå€¼ï¼Œè¯´æ˜midå°±æ˜¯ç¬¬ä¸€ä¸ªå€¼äº†
 				return mid;
 			}
 		}else if(arr[mid] > value) {
@@ -87,7 +87,7 @@ public class SearchTest {
 	}
 	
 	/**
-	 * ²éÕÒ×îºóÒ»¸öÖµµÈÓÚ¸ø¶¨ÖµµÄÔªËØ
+	 * æŸ¥æ‰¾æœ€åä¸€ä¸ªå€¼ç­‰äºç»™å®šå€¼çš„å…ƒç´ 
 	 * @return
 	 */
 	public static int getLastSearch(int[] arr , int start , int end , int value) {
@@ -101,10 +101,10 @@ public class SearchTest {
 		int mid = start + ((end - start) >> 1);
 		if(arr[mid] == value) {
 			if(mid < end && arr[mid + 1] == value) {
-				//ÖĞ¼äÖµµÄºóÒ»¸öÒ²ÊÇÕâ¸öÖµ£¬ËùÒÔ¾Í¼ÌĞøÍùÏÂÕÒ
+				//ä¸­é—´å€¼çš„åä¸€ä¸ªä¹Ÿæ˜¯è¿™ä¸ªå€¼ï¼Œæ‰€ä»¥å°±ç»§ç»­å¾€ä¸‹æ‰¾
 				return getLastSearch(arr , mid + 1 , end , value);
 			}else {
-				//ÖĞ¼äÖµµÄÇ°Ò»¸ö²»ÊÇÕâ¸öÖµ£¬ËµÃ÷mid¾ÍÊÇµÚÒ»¸öÖµÁË
+				//ä¸­é—´å€¼çš„å‰ä¸€ä¸ªä¸æ˜¯è¿™ä¸ªå€¼ï¼Œè¯´æ˜midå°±æ˜¯ç¬¬ä¸€ä¸ªå€¼äº†
 				return mid;
 			}
 		}else if(arr[mid] > value) {
@@ -115,7 +115,7 @@ public class SearchTest {
 	}
 	
 	/**
-	 * ²éÕÒµÚÒ»¸ö´óÓÚµÈÓÚ¸ø¶¨ÖµµÄÔªËØ
+	 * æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå¤§äºç­‰äºç»™å®šå€¼çš„å…ƒç´ 
 	 * @return
 	 */
 	public static int getFirstAboveSearch(int[] arr , int start , int end , int value) {
@@ -139,7 +139,7 @@ public class SearchTest {
 	}
 	
 	/**
-	 * ²éÕÒ×îºóÒ»¸öĞ¡ÓÚµÈÓÚ¸ø¶¨ÖµµÄÔªËØ
+	 * æŸ¥æ‰¾æœ€åä¸€ä¸ªå°äºç­‰äºç»™å®šå€¼çš„å…ƒç´ 
 	 * @return
 	 */
 	public static int getLastBelowSearch(int[] arr , int start , int end , int value) {
@@ -175,22 +175,22 @@ public class SearchTest {
 		Random random = new Random();
 		int next = random.nextInt(20000);
 		
-		System.out.println("Ñ­»·Ê½¶ş·Ö²éÕÒ:" + next + "£¬½á¹û:" + binSearch(arr , length , next));
+		System.out.println("å¾ªç¯å¼äºŒåˆ†æŸ¥æ‰¾:" + next + "ï¼Œç»“æœ:" + binSearch(arr , length , next));
 		for(int i = 0 ; i < size ; i ++) {
 			binSearch(arr , length , random.nextInt(20000));
 		}
-		System.out.println("Ñ­»·Ê½¶ş·Ö²éÕÒ£¬Êı×é´óĞ¡" + length + "£¬²éÕÒ" + size + "´Î - ×ÜºÄÊ±" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("å¾ªç¯å¼äºŒåˆ†æŸ¥æ‰¾ï¼Œæ•°ç»„å¤§å°" + length + "ï¼ŒæŸ¥æ‰¾" + size + "æ¬¡ - æ€»è€—æ—¶" + (System.currentTimeMillis() - before) + "ms");
 		
 		before = System.currentTimeMillis();
-		System.out.println("µİ¹éÊ½¶ş·Ö²éÕÒ:" + next + "£¬½á¹û:" + binSearchByCircle(arr , 0 , length - 1 , next));
+		System.out.println("é€’å½’å¼äºŒåˆ†æŸ¥æ‰¾:" + next + "ï¼Œç»“æœ:" + binSearchByCircle(arr , 0 , length - 1 , next));
 		for(int i = 0 ; i < size ; i ++) {
 			binSearchByCircle(arr , 0 , length - 1 , random.nextInt(20000));
 		}
-		System.out.println("µİ¹éÊ½¶ş·Ö²éÕÒ£¬Êı×é´óĞ¡" + length + "£¬²éÕÒ" + size + "´Î - ×ÜºÄÊ±" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("é€’å½’å¼äºŒåˆ†æŸ¥æ‰¾ï¼Œæ•°ç»„å¤§å°" + length + "ï¼ŒæŸ¥æ‰¾" + size + "æ¬¡ - æ€»è€—æ—¶" + (System.currentTimeMillis() - before) + "ms");
 	
-		System.out.println("²éÕÒµÚÒ»¸öÖµµÈÓÚ¸ø¶¨ÖµµÄÔªËØ:" + next + "£¬½á¹û:" + getFirstSearch(arr , 0 , length - 1 , next));
-		System.out.println("²éÕÒ×îºóÒ»¸öÖµµÈÓÚ¸ø¶¨ÖµµÄÔªËØ:" + next + "£¬½á¹û:" + getLastSearch(arr , 0 , length - 1 , next));
-		System.out.println("²éÕÒµÚÒ»¸öÖµ´óÓÚµÈÓÚ¸ø¶¨ÖµµÄÔªËØ:" + next + "£¬½á¹û:" + getFirstAboveSearch(arr , 0 , length - 1 , next));
-		System.out.println("²éÕÒ×îºóÒ»¸öÖµĞ¡ÓÚµÈÓÚ¸ø¶¨ÖµµÄÔªËØ:" + next + "£¬½á¹û:" + getLastBelowSearch(arr , 0 , length - 1 , next));
+		System.out.println("æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå€¼ç­‰äºç»™å®šå€¼çš„å…ƒç´ :" + next + "ï¼Œç»“æœ:" + getFirstSearch(arr , 0 , length - 1 , next));
+		System.out.println("æŸ¥æ‰¾æœ€åä¸€ä¸ªå€¼ç­‰äºç»™å®šå€¼çš„å…ƒç´ :" + next + "ï¼Œç»“æœ:" + getLastSearch(arr , 0 , length - 1 , next));
+		System.out.println("æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå€¼å¤§äºç­‰äºç»™å®šå€¼çš„å…ƒç´ :" + next + "ï¼Œç»“æœ:" + getFirstAboveSearch(arr , 0 , length - 1 , next));
+		System.out.println("æŸ¥æ‰¾æœ€åä¸€ä¸ªå€¼å°äºç­‰äºç»™å®šå€¼çš„å…ƒç´ :" + next + "ï¼Œç»“æœ:" + getLastBelowSearch(arr , 0 , length - 1 , next));
 	}
 }

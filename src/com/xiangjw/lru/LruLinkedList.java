@@ -15,8 +15,8 @@ public class LruLinkedList<T> {
 	}
 	
 	/**
-	 * Ñ°ÕÒÄ³ÔªËØµÄÉÏÒ»½Úµã£¬Èç¹û´æÔÚµÄ»°
-	 * Æ½¾ùÊ±¼ä¸´ÔÓ¶ÈO(n)
+	 * å¯»æ‰¾æŸå…ƒç´ çš„ä¸Šä¸€èŠ‚ç‚¹ï¼Œå¦‚æœå­˜åœ¨çš„è¯
+	 * å¹³å‡æ—¶é—´å¤æ‚åº¦O(n)
 	 * @param info
 	 * @return
 	 */
@@ -37,24 +37,24 @@ public class LruLinkedList<T> {
 			throw new IllegalArgumentException("Value cannot be null");
 		}
 		
-		//ÔªËØÒÑÔÚ¶ÓÁĞÇÒµÚÒ»Î»£¬ÎŞĞèÔÙÈÎºÎ´¦Àí
+		//å…ƒç´ å·²åœ¨é˜Ÿåˆ—ä¸”ç¬¬ä¸€ä½ï¼Œæ— éœ€å†ä»»ä½•å¤„ç†
 		if(firstNode != null && info.equals(firstNode.getData())) {
 			return;
 		}
 		
 		Node pre = findPreNode(info);
 		if(pre != null) {
-			//´æÔÚÇÒ²»ÔÚµÚÒ»Î»,Ö±½ÓÅ²¶¯ÔªËØµ½µÚÒ»Î»
+			//å­˜åœ¨ä¸”ä¸åœ¨ç¬¬ä¸€ä½,ç›´æ¥æŒªåŠ¨å…ƒç´ åˆ°ç¬¬ä¸€ä½
 			Node target = pre.getNext();
 			pre.setNext(target.getNext());
 			target.setNext(firstNode);
 			firstNode = target;
 		}else {
-			//²»´æÔÚ
+			//ä¸å­˜åœ¨
 			if(length == sizeOfList) {
-				//Á´±í³¤¶ÈÒÑ´ïÉÏÏŞ£¬É¾³ı×îÄ©Î»
+				//é“¾è¡¨é•¿åº¦å·²è¾¾ä¸Šé™ï¼Œåˆ é™¤æœ€æœ«ä½
 				if(sizeOfList > 1) {
-					//ÕÒµ½Á´±íµ¹ÊıµÚ¶şÎ»£¬Ê¹Ö®±äÎªµ¹ÊıµÚÒ»Î»
+					//æ‰¾åˆ°é“¾è¡¨å€’æ•°ç¬¬äºŒä½ï¼Œä½¿ä¹‹å˜ä¸ºå€’æ•°ç¬¬ä¸€ä½
 					Node p = firstNode;
 					while(p != null) {
 						if(p.getNext() != null && p.getNext().getNext() == null) {
@@ -68,13 +68,13 @@ public class LruLinkedList<T> {
 						length --;
 					}
 				}else {
-					//Á´±íÈİÁ¿×Ü¹²¾ÍÒ»Î»£¬Ö±½ÓÇåÁã¡£
+					//é“¾è¡¨å®¹é‡æ€»å…±å°±ä¸€ä½ï¼Œç›´æ¥æ¸…é›¶ã€‚
 					firstNode = null;
 					length = 0;
 				}
 			}
 				
-			//Á´±í³¤¶È»¹Ã»µ½ÉÏÏŞ£¬Ö±½Ó²åÈë
+			//é“¾è¡¨é•¿åº¦è¿˜æ²¡åˆ°ä¸Šé™ï¼Œç›´æ¥æ’å…¥
 			Node target = new Node(info, firstNode);
 			firstNode = target;
 			length ++;
@@ -82,8 +82,8 @@ public class LruLinkedList<T> {
 	}
 	
 	public void print() {
-		System.out.print("Õ¼ÓÃ¿Õ¼ä:" + sizeOfList + "£¬ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("å ç”¨ç©ºé—´:" + sizeOfList + "ï¼Œå…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		Node p = firstNode;
 		while (p != null) {
 			buffer.append(p.getData() == null ? "null" : p.getData().toString()).append(",");
@@ -145,7 +145,7 @@ public class LruLinkedList<T> {
 		}
 		cache.print();
 		
-		System.out.println("ºÄÊ±£º" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("è€—æ—¶ï¼š" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
 

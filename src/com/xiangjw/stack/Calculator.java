@@ -1,7 +1,7 @@
 package com.xiangjw.stack;
 
 /**
- * ¼òÒ×¼ÆËãÆ÷
+ * ç®€æ˜“è®¡ç®—å™¨
  * @author Administrator
  *
  */
@@ -23,7 +23,7 @@ public class Calculator {
 	}
 	
 	/**
-	 * À¨ºÅ¿ª±ÕÊÇ·ñºÏ¹æ
+	 * æ‹¬å·å¼€é—­æ˜¯å¦åˆè§„
 	 * @return
 	 */
 	public boolean isSubsOk() {
@@ -60,7 +60,7 @@ public class Calculator {
 	
 	public double cal() {
 		if(!isSubsOk()) {
-			System.out.println("·ûºÅ´íÎó");
+			System.out.println("ç¬¦å·é”™è¯¯");
 			return 0;
 		}
 		
@@ -68,73 +68,73 @@ public class Calculator {
 		for(int i = 0 ; i < info.length() ; i ++) {
 			Character item = info.charAt(i);
 			if(item.equals(' ')) {
-				continue;//ºöÂÔ¿Õ¸ñ
+				continue;//å¿½ç•¥ç©ºæ ¼
 			}
 			
 			if(item.equals('(')) {
-				//×óÀ¨ºÅÖ±½ÓÑ¹Õ»
+				//å·¦æ‹¬å·ç›´æ¥å‹æ ˆ
 				opers.push(item);
 			}else if(item.equals(')')) {
-				//Åöµ½ÓÒÀ¨ºÅ£¬Òª½áËãµ½×óÀ¨ºÅÁË
+				//ç¢°åˆ°å³æ‹¬å·ï¼Œè¦ç»“ç®—åˆ°å·¦æ‹¬å·äº†
 				if(buffer.length() > 0) {
 					try {
 						Double val = Double.valueOf(buffer.toString());
-						System.out.println("ÕÒµ½Êı×Ö >>> " + val);
+						System.out.println("æ‰¾åˆ°æ•°å­— >>> " + val);
 						buffer = new StringBuffer();
 						
-						//ÏÈ´¦ÀíÊı×Ö
+						//å…ˆå¤„ç†æ•°å­—
 						doNum(val);
 					}catch(Exception e) {
-						System.out.println("Êı¾İ´æÔÚ´íÎó");
+						System.out.println("æ•°æ®å­˜åœ¨é”™è¯¯");
 						return 0;
 					}
 				}else {
-					System.out.println("Êı¾İ´æÔÚ´íÎó");
+					System.out.println("æ•°æ®å­˜åœ¨é”™è¯¯");
 					return 0;
 				}
 				
 				doCalWithSubs();
 			}else if(OPERATOR.contains(item.toString())) {
 				if(i == 0) {
-					System.out.println("µÚÒ»Î»±ØĞëÊÇÊı×Ö");
+					System.out.println("ç¬¬ä¸€ä½å¿…é¡»æ˜¯æ•°å­—");
 					return 0;
 				}
 				if(i == info.length() - 1) {
-					System.out.println("×îºóÒ»Î»±ØĞëÊÇÊı×Ö");
+					System.out.println("æœ€åä¸€ä½å¿…é¡»æ˜¯æ•°å­—");
 					return 0;
 				}
-				//ÕÒµ½·ûºÅ
+				//æ‰¾åˆ°ç¬¦å·
 				if(buffer.length() > 0) {
 					
 					try {
 						Double val = Double.valueOf(buffer.toString());
-						System.out.println("ÕÒµ½Êı×Ö >>> " + val);
+						System.out.println("æ‰¾åˆ°æ•°å­— >>> " + val);
 						buffer = new StringBuffer();
 						
-						//ÏÈ´¦ÀíÊı×Ö
+						//å…ˆå¤„ç†æ•°å­—
 						doNum(val);
 					}catch(Exception e) {
-						System.out.println("Êı¾İ´æÔÚ´íÎó");
+						System.out.println("æ•°æ®å­˜åœ¨é”™è¯¯");
 						return 0;
 					}
 				}
 				
-				System.out.println("ÕÒµ½·ûºÅ >>> " + item);
-				//ÔÙ´¦Àí·ûºÅ
+				System.out.println("æ‰¾åˆ°ç¬¦å· >>> " + item);
+				//å†å¤„ç†ç¬¦å·
 				doOpera(item);
 			}else {
-				//×é×°Êı×Ö
+				//ç»„è£…æ•°å­—
 				buffer.append(item);
 				
 				if( i == info.length() - 1) {
 					try {
 						Double val = Double.valueOf(buffer.toString());
-						System.out.println("ÕÒµ½Êı×Ö >>> " + val);
-						//´¦Àí×îºóÒ»¸öÊı×Ö
+						System.out.println("æ‰¾åˆ°æ•°å­— >>> " + val);
+						//å¤„ç†æœ€åä¸€ä¸ªæ•°å­—
 						doNum(val);
 						return lastCal();
 					}catch(Exception e) {
-						System.out.println("Êı¾İ´æÔÚ´íÎó");
+						System.out.println("æ•°æ®å­˜åœ¨é”™è¯¯");
 						return 0;
 					}
 				}
@@ -144,18 +144,18 @@ public class Calculator {
 		return 0;
 	}
 	
-	//À¨ºÅ½áËã
+	//æ‹¬å·ç»“ç®—
 	private void doCalWithSubs() {
 		while(opers.get() != null && !opers.get().equals('(')) {
 			Character op = opers.pull();
 			Double num2 = nums.pull();
 			Double num1 = nums.pull();
 			Double result = doCal(num1 , num2 , op);
-			System.out.println("¼ÆËã" + num1 + op + num2 + "=" + result);
+			System.out.println("è®¡ç®—" + num1 + op + num2 + "=" + result);
 			nums.push(result);
 		}
 		
-		//×óÀ¨ºÅÈ¡³öÀ´¶ªµô
+		//å·¦æ‹¬å·å–å‡ºæ¥ä¸¢æ‰
 		opers.pull();
 	}
 	
@@ -165,16 +165,16 @@ public class Calculator {
 	
 	private void doOpera(char item) {
 		if(opers.getLength() > 0 && isOperaBigger(opers.get() , item)) {
-			//À´ÁË¸ö´óÓÅÏÈ¼¶ÔËËã·û£¬Ñ¹Õ»
+			//æ¥äº†ä¸ªå¤§ä¼˜å…ˆçº§è¿ç®—ç¬¦ï¼Œå‹æ ˆ
 			opers.push(item);
 		}else {
-			//À´ÁË¸öÆ½¼¶»òĞ¡¼¶ÔËËã·û£¬¼ÆËãÕ»ÖĞÖ®Ç°µÄÊıÖµ..ËãÍêÔÙÑ¹Õ»
+			//æ¥äº†ä¸ªå¹³çº§æˆ–å°çº§è¿ç®—ç¬¦ï¼Œè®¡ç®—æ ˆä¸­ä¹‹å‰çš„æ•°å€¼..ç®—å®Œå†å‹æ ˆ
 			while(opers.get() != null && !opers.get().equals('(')) {
 				Character op = opers.pull();
 				Double num2 = nums.pull();
 				Double num1 = nums.pull();
 				Double result = doCal(num1 , num2 , op);
-				System.out.println("¼ÆËã" + num1 + op + num2 + "=" + result);
+				System.out.println("è®¡ç®—" + num1 + op + num2 + "=" + result);
 				nums.push(result);
 			}
 			
@@ -188,7 +188,7 @@ public class Calculator {
 			Double num2 = nums.pull();
 			Double num1 = nums.pull();
 			Double result = doCal(num1 , num2 , item);
-			System.out.println("¼ÆËã" + num1 + item + num2 + "=" + result);
+			System.out.println("è®¡ç®—" + num1 + item + num2 + "=" + result);
 			nums.push(result);
 		}
 		
@@ -220,6 +220,6 @@ public class Calculator {
 	
 	public static void main(String[] args) {
 		Calculator cal = new Calculator("(3+5)*8-6");
-		System.out.println("ÔËËã½á¹û£º" + cal.cal());
+		System.out.println("è¿ç®—ç»“æœï¼š" + cal.cal());
 	}
 }

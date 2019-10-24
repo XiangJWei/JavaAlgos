@@ -2,11 +2,11 @@ package com.xiangjw.linkedlist;
 
 
 /**
- * µ¥Á´±í·´×ª
- * Á´±íÖĞ»·µÄ¼ì²â
- * Á½¸öÓĞĞòµÄÁ´±íºÏ²¢
- * É¾³ıÁ´±íµ¹ÊıµÚ n ¸ö½áµã
- * ÇóÁ´±íµÄÖĞ¼ä½áµã
+ * å•é“¾è¡¨åè½¬
+ * é“¾è¡¨ä¸­ç¯çš„æ£€æµ‹
+ * ä¸¤ä¸ªæœ‰åºçš„é“¾è¡¨åˆå¹¶
+ * åˆ é™¤é“¾è¡¨å€’æ•°ç¬¬ n ä¸ªç»“ç‚¹
+ * æ±‚é“¾è¡¨çš„ä¸­é—´ç»“ç‚¹
  */
 public class LinkedListAlgo {
 	
@@ -15,8 +15,8 @@ public class LinkedListAlgo {
 	private int length;
 	
 	/**
-	 * ´øÉÚ±ø½ÚµãµÄÁ´±í³õÊ¼»¯
-	 * @param preVal  ÉÚ±ø½Úµã¸øµÄÖµ
+	 * å¸¦å“¨å…µèŠ‚ç‚¹çš„é“¾è¡¨åˆå§‹åŒ–
+	 * @param preVal  å“¨å…µèŠ‚ç‚¹ç»™çš„å€¼
 	 */
 	public LinkedListAlgo(int preVal) {
 		firstNode = new Node(preVal, null);
@@ -37,7 +37,7 @@ public class LinkedListAlgo {
 	}
 	
 	public void add(Node node) {
-		//ÏÈÕÒnodeµÄ³¤¶È£¬ÒòÎªnode¿ÉÄÜ²»ÊÇÒ»¸öµ¥Ò»½Úµã£¬Ò²¿ÉÄÜÊÇÒ»¸öÁ´±í
+		//å…ˆæ‰¾nodeçš„é•¿åº¦ï¼Œå› ä¸ºnodeå¯èƒ½ä¸æ˜¯ä¸€ä¸ªå•ä¸€èŠ‚ç‚¹ï¼Œä¹Ÿå¯èƒ½æ˜¯ä¸€ä¸ªé“¾è¡¨
 		Node m = node;
 		int count = 0;
 		while(m != null) {
@@ -45,7 +45,7 @@ public class LinkedListAlgo {
 			m = m .getNext();
 		}
 		
-		//ÔÙ²åÈë
+		//å†æ’å…¥
 		Node p = firstNode;
 		while(p != null) {
 			if(p.getNext() == null) {
@@ -84,7 +84,7 @@ public class LinkedListAlgo {
 	}
 
 	/**
-	 * ·´×ª£¬µ¹Ğğ
+	 * åè½¬ï¼Œå€’å™
 	 */
 	public void roundOver() {
 		Node newNode = new Node(firstNode.getData(), null);
@@ -100,7 +100,7 @@ public class LinkedListAlgo {
 	}
 	
 	/**
-	 * ¼ì²âÁ´±íÊÇ·ñ°üº¬»·£¬Èç¹ûÓĞ£¬·µ»Ø»·µÄÈë¿Úµã
+	 * æ£€æµ‹é“¾è¡¨æ˜¯å¦åŒ…å«ç¯ï¼Œå¦‚æœæœ‰ï¼Œè¿”å›ç¯çš„å…¥å£ç‚¹
 	 * 
 	 * @return
 	 */
@@ -108,15 +108,15 @@ public class LinkedListAlgo {
 		if(length <= 1) {
 			return null;
 		}
-		Node p = firstNode.getNext();//ÂıÖ¸Õë
-		Node q = firstNode.getNext();//¿ìÖ¸Õë
+		Node p = firstNode.getNext();//æ…¢æŒ‡é’ˆ
+		Node q = firstNode.getNext();//å¿«æŒ‡é’ˆ
 		int i = 0;
 		boolean isOk = false;
 		while(q != null && q.getNext() != null && q.getNext().getNext() != null) {
-			//Èç¹ûÓĞ»·£¬ÄÇÂıÖ¸Õë½ø»·ºó£¬ÏÂÒ»´Î¿ìÖ¸Õë³¬¹ıÂıÖ¸ÕëÊ±±ØÈ»»áºÍÂıÖ¸ÕëÏàÓö
-			if(i > 0 && p == q) {//ÅÅ³ıµÚÒ»´Î£¬ÒòÎªµÚÒ»´ÎÁ½¸öÖ¸Õë¾ÍÔÚÒ»Æğ
+			//å¦‚æœæœ‰ç¯ï¼Œé‚£æ…¢æŒ‡é’ˆè¿›ç¯åï¼Œä¸‹ä¸€æ¬¡å¿«æŒ‡é’ˆè¶…è¿‡æ…¢æŒ‡é’ˆæ—¶å¿…ç„¶ä¼šå’Œæ…¢æŒ‡é’ˆç›¸é‡
+			if(i > 0 && p == q) {//æ’é™¤ç¬¬ä¸€æ¬¡ï¼Œå› ä¸ºç¬¬ä¸€æ¬¡ä¸¤ä¸ªæŒ‡é’ˆå°±åœ¨ä¸€èµ·
 				isOk = true;
-				System.out.println("µÚ" + i + "²½ÏàÓö");
+				System.out.println("ç¬¬" + i + "æ­¥ç›¸é‡");
 				break;
 			}
 			p = p.getNext();
@@ -125,14 +125,14 @@ public class LinkedListAlgo {
 		}
 		
 		if(isOk) {
-			//p»Øµ½ÆğÊ¼Î»ÖÃ£¬q»¹ÊÇÔÚÏàÓöµã¡£
-			//ÕâÊÇÁ½Ö¸ÕëÍ¬ËÙ¶ÈÅÜ£¬ÔÙ´ÎÏàÓöµã¾ÍÊÇ»·µÄÈë¿Ú
-			//¼ÙÉèÈë¿Ú´¦ÎªK£¬µÚÒ»´ÎÁ½µãÏàÓöÎªN£¬Ôò»·µÄ´óĞ¡ÎªN£¬¼ÙÉèPÀëÏÂÒ»´Îµ½Èë¿Ú»¹ÓĞM,ÔòM = N - (N - K) = K
-			//ËùÒÔ°ÑPÒÆ»ØÆğÊ¼µã£¬QÔÚNµã£¬Á½¸öÖ¸ÕëÍ¬ËÙ¶ÈÒÆ¶¯K²½£¬¾Í»áÔÚKµãÏàÓö¡£
+			//på›åˆ°èµ·å§‹ä½ç½®ï¼Œqè¿˜æ˜¯åœ¨ç›¸é‡ç‚¹ã€‚
+			//è¿™æ˜¯ä¸¤æŒ‡é’ˆåŒé€Ÿåº¦è·‘ï¼Œå†æ¬¡ç›¸é‡ç‚¹å°±æ˜¯ç¯çš„å…¥å£
+			//å‡è®¾å…¥å£å¤„ä¸ºKï¼Œç¬¬ä¸€æ¬¡ä¸¤ç‚¹ç›¸é‡ä¸ºNï¼Œåˆ™ç¯çš„å¤§å°ä¸ºNï¼Œå‡è®¾Pç¦»ä¸‹ä¸€æ¬¡åˆ°å…¥å£è¿˜æœ‰M,åˆ™M = N - (N - K) = K
+			//æ‰€ä»¥æŠŠPç§»å›èµ·å§‹ç‚¹ï¼ŒQåœ¨Nç‚¹ï¼Œä¸¤ä¸ªæŒ‡é’ˆåŒé€Ÿåº¦ç§»åŠ¨Kæ­¥ï¼Œå°±ä¼šåœ¨Kç‚¹ç›¸é‡ã€‚
 			p = firstNode.getNext();
 			while(q != null && p != null && p.getNext() != null && q.getNext() != null) {
 				if(p == q) {
-					//ÕÒµ½ÆğÊ¼µã£¬Ò²¾ÍÊÇKµã
+					//æ‰¾åˆ°èµ·å§‹ç‚¹ï¼Œä¹Ÿå°±æ˜¯Kç‚¹
 					return p;
 				}
 				p = p.getNext();
@@ -144,7 +144,7 @@ public class LinkedListAlgo {
 	}
 	
 	/**
-	 * Á½¸öÓĞĞòÁ´±íµÄºÏ²¢
+	 * ä¸¤ä¸ªæœ‰åºé“¾è¡¨çš„åˆå¹¶
 	 * @param other
 	 */
 	public void sortWith(LinkedListAlgo other) {
@@ -154,19 +154,19 @@ public class LinkedListAlgo {
 		
 		while(p != null || q != null) {
 			if(p == null) {
-				//pÒÑ¾­±éÀú½áÊø£¬ËùÒÔÖ±½Ó×·¼ÓqµÄÊ£Óà½Úµã£¬Ñ­»·ÖÕÖ¹
+				//på·²ç»éå†ç»“æŸï¼Œæ‰€ä»¥ç›´æ¥è¿½åŠ qçš„å‰©ä½™èŠ‚ç‚¹ï¼Œå¾ªç¯ç»ˆæ­¢
 				newList.add(q);
 				break;
 			}else if(q == null) {
-				//qÒÑ¾­±éÀú½áÊø£¬ËùÒÔÖ±½Ó×·¼ÓpµÄÊ£Óà½Úµã£¬Ñ­»·ÖÕÖ¹
+				//qå·²ç»éå†ç»“æŸï¼Œæ‰€ä»¥ç›´æ¥è¿½åŠ pçš„å‰©ä½™èŠ‚ç‚¹ï¼Œå¾ªç¯ç»ˆæ­¢
 				newList.add(p);
 				break;
 			}else if(p.getData() <= q.getData()){
-				//p¡¢q¶¼»¹ÓĞÖµ£¬ËùÒÔ¶Ô±È£¬pĞ¡·Åp£¬½øÈëÏÂÒ»´ÎÑ­»·
+				//pã€qéƒ½è¿˜æœ‰å€¼ï¼Œæ‰€ä»¥å¯¹æ¯”ï¼Œpå°æ”¾pï¼Œè¿›å…¥ä¸‹ä¸€æ¬¡å¾ªç¯
 				newList.add(new Node(p.getData(), null));
 				p = p.getNext();
 			}else {
-				//p¡¢q¶¼»¹ÓĞÖµ£¬ËùÒÔ¶Ô±È£¬qĞ¡·Åq£¬½øÈëÏÂÒ»´ÎÑ­»·
+				//pã€qéƒ½è¿˜æœ‰å€¼ï¼Œæ‰€ä»¥å¯¹æ¯”ï¼Œqå°æ”¾qï¼Œè¿›å…¥ä¸‹ä¸€æ¬¡å¾ªç¯
 				newList.add(new Node(q.getData(), null));
 				q = q.getNext();
 			}
@@ -176,7 +176,7 @@ public class LinkedListAlgo {
 	}
 	
 	/**
-	 * É¾³ıÁ´±íµ¹ÊıµÚ n ¸ö½áµã
+	 * åˆ é™¤é“¾è¡¨å€’æ•°ç¬¬ n ä¸ªç»“ç‚¹
 	 * @param index
 	 */
 	public void deleteLastIndexOf(int index) {
@@ -192,7 +192,7 @@ public class LinkedListAlgo {
 		
 		int sp = 0;
 		while(p != null && sp < index - 1) {
-			//pÖ¸ÏòÕıÊıµÚindex¸ö½Úµã
+			//pæŒ‡å‘æ­£æ•°ç¬¬indexä¸ªèŠ‚ç‚¹
 			sp ++;
 			p = p.getNext();
 		}
@@ -202,13 +202,13 @@ public class LinkedListAlgo {
 			q = q.getNext();
 		}
 		
-		//É¾³ıq½ÚµãµÄºóÒ»¸ö½Úµã
+		//åˆ é™¤qèŠ‚ç‚¹çš„åä¸€ä¸ªèŠ‚ç‚¹
 		q.setNext(q.getNext().getNext());
 		length --;
 	}
 	
 	/**
-	 * ÕÒÁ´±íµÄÖĞ¼ä½áµã
+	 * æ‰¾é“¾è¡¨çš„ä¸­é—´ç»“ç‚¹
 	 */
 	public void printMiddleNode() {
 		Node p = firstNode.getNext();
@@ -216,12 +216,12 @@ public class LinkedListAlgo {
 		
 		while(q != null) {
 			if(q.getNext() == null) {
-				//»ùÊıĞĞÊı£¬ÖĞ¼ä½ÚµãÎªÒ»¸ö
-				System.out.println("ÖĞ¼ä½ÚµãÎª£º" + p.getData());
+				//åŸºæ•°è¡Œæ•°ï¼Œä¸­é—´èŠ‚ç‚¹ä¸ºä¸€ä¸ª
+				System.out.println("ä¸­é—´èŠ‚ç‚¹ä¸ºï¼š" + p.getData());
 				return;
 			}else if(q.getNext().getNext() == null) {
-				//»ùÊıĞĞÊı£¬ÖĞ¼ä½ÚµãÎªÁ½¸ö
-				System.out.println("ÖĞ¼ä½ÚµãÎª£º" + p.getData() + " + " + p.getNext().getData());
+				//åŸºæ•°è¡Œæ•°ï¼Œä¸­é—´èŠ‚ç‚¹ä¸ºä¸¤ä¸ª
+				System.out.println("ä¸­é—´èŠ‚ç‚¹ä¸ºï¼š" + p.getData() + " + " + p.getNext().getData());
 				return;
 			}
 			
@@ -231,8 +231,8 @@ public class LinkedListAlgo {
 	}
 	
 	public void print() {
-		System.out.print("ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		Node p = firstNode.getNext();
 		while (p != null) {
 			buffer.append(p.getData()).append(",");
@@ -289,12 +289,12 @@ public class LinkedListAlgo {
 		
 		list.roundOver();
 		Node circle = list.checkIfRound();
-		System.out.println("ÊÇ·ñÓĞ»·£º" + (circle == null ? "Ä¾ÓĞ": "ÓĞ£¬Èë¿ÚÖµÎª" + circle.getData()));
+		System.out.println("æ˜¯å¦æœ‰ç¯ï¼š" + (circle == null ? "æœ¨æœ‰": "æœ‰ï¼Œå…¥å£å€¼ä¸º" + circle.getData()));
 		list.add(6);
 		list.print();
 		list.add(list.findByIndex(4));
 		Node circle2 = list.checkIfRound();
-		System.out.println("ÊÇ·ñÓĞ»·£º" + (circle2 == null ? "Ä¾ÓĞ": "ÓĞ£¬Èë¿ÚÖµÎª" + circle2.getData()));
+		System.out.println("æ˜¯å¦æœ‰ç¯ï¼š" + (circle2 == null ? "æœ¨æœ‰": "æœ‰ï¼Œå…¥å£å€¼ä¸º" + circle2.getData()));
 		
 		
 		LinkedListAlgo list2 = new LinkedListAlgo(-1);

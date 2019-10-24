@@ -1,13 +1,13 @@
 package com.xiangjw.linkedlist;
 
 /**
- * Ìø±í£¬ÓÖ³ÆÌøÔ¾Á´±í
+ * è·³è¡¨ï¼Œåˆç§°è·³è·ƒé“¾è¡¨
  * @author Administrator
  *
  */
 public class SkipLinkedList {
 	
-	private Node firstNode;//´æ´¢µ¥Á´±í
+	private Node firstNode;//å­˜å‚¨å•é“¾è¡¨
 	private int length;
 	private int levelCount;
 	
@@ -15,7 +15,7 @@ public class SkipLinkedList {
 	private static final int MAX_LEVEL = 16;
 	
 	public SkipLinkedList() {
-		this.firstNode = new Node(-1 , 0);//ÉÚ±ø
+		this.firstNode = new Node(-1 , 0);//å“¨å…µ
 		this.length = 0;
 		this.levelCount = 1;
 	}
@@ -28,7 +28,7 @@ public class SkipLinkedList {
 		
 		Node p = firstNode;
 		Node item = new Node(val , level);
-		//ÏÈ²¹³äµÚÒ»¸ö½Úµã
+		//å…ˆè¡¥å……ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
 		for(int i = p.currLevel ; i < level ; i ++) {
 			if(p.next == null) {
 				p.next = new Node[level];
@@ -89,13 +89,13 @@ public class SkipLinkedList {
 			p = p.next[0];
 		}
 		
-		System.out.println("µ±Ç°Á´±í£º" + buffer.toString());
+		System.out.println("å½“å‰é“¾è¡¨ï¼š" + buffer.toString());
 	}
 	
 	private class Node {
 		private int data;
-		private Node[] next;//next[0]´æ·ÅÔ­±¾Á´±íµÄÏÂÒ»¸ö£¬next[1]´æ·ÅÌø±íÉÏÒ»²ãµÄ¶ÔÓ¦¶ÔÏó£¬ÒÔ´ËÀàÍÆ¡£
-		private int currLevel;//µ±Ç°½Úµã¹²ÓĞ¶àÉÙ²ã
+		private Node[] next;//next[0]å­˜æ”¾åŸæœ¬é“¾è¡¨çš„ä¸‹ä¸€ä¸ªï¼Œnext[1]å­˜æ”¾è·³è¡¨ä¸Šä¸€å±‚çš„å¯¹åº”å¯¹è±¡ï¼Œä»¥æ­¤ç±»æ¨ã€‚
+		private int currLevel;//å½“å‰èŠ‚ç‚¹å…±æœ‰å¤šå°‘å±‚
 		public Node() {
 			super();
 		}

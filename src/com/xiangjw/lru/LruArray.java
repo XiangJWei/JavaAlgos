@@ -29,16 +29,16 @@ public class LruArray<T> {
 		
 		int index = find(info);
 		if(index >= 0) {
-			//´æÔÚ,Ö±½ÓÅ²¶¯ÔªËØµ½×îºó
+			//å­˜åœ¨,ç›´æ¥æŒªåŠ¨å…ƒç´ åˆ°æœ€å
 			T temp = arr[index];
 			for(int i = index ; i < length - 1 ; i ++) {
 				arr[i] = arr[i + 1];
 			}
 			arr[length - 1] = temp;
 		}else {
-			//²»´æÔÚ
+			//ä¸å­˜åœ¨
 			if(length == sizeOfArray) {
-				//³¤¶ÈÒÑ´ïÉÏÏŞ£¬É¾³ı×îÊ×
+				//é•¿åº¦å·²è¾¾ä¸Šé™ï¼Œåˆ é™¤æœ€é¦–
 				for(int i = 0 ; i < length - 1 ; i ++) {
 					arr[i] = arr[i + 1];
 				}
@@ -46,15 +46,15 @@ public class LruArray<T> {
 				length --;
 			}
 			
-			//Á´±í³¤¶È»¹Ã»µ½ÉÏÏŞ£¬Ö±½Ó²åÈë
+			//é“¾è¡¨é•¿åº¦è¿˜æ²¡åˆ°ä¸Šé™ï¼Œç›´æ¥æ’å…¥
 			arr[length] = info;
 			length ++;
 		}
 	}
 	
 	public void print() {
-		System.out.print("Õ¼ÓÃ¿Õ¼ä:" + sizeOfArray + "£¬ÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("å ç”¨ç©ºé—´:" + sizeOfArray + "ï¼Œå…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		for(int i = 0 ; i < sizeOfArray ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i] == null ? "null" : arr[i].toString());
@@ -86,6 +86,6 @@ public class LruArray<T> {
 		}
 		cache.print();
 		
-		System.out.println("ºÄÊ±£º" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("è€—æ—¶ï¼š" + (System.currentTimeMillis() - before) + "ms");
 	}
 }

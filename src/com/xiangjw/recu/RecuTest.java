@@ -3,19 +3,19 @@ package com.xiangjw.recu;
 import java.util.HashMap;
 
 /**
- * µİ¹éÏà¹ØËã·¨
- * µİ¹é´úÂëËäÈ»¼ò½à¸ßĞ§£¬µ«ÊÇ£¬µİ¹é´úÂëÒ²ÓĞºÜ¶à±×¶Ë¡£±ÈÈç£¬¶ÑÕ»Òç³ö¡¢ÖØ¸´¼ÆËã¡¢º¯Êıµ÷ÓÃºÄÊ±¶à¡¢¿Õ¼ä¸´ÔÓ¶È¸ßµÈ
+ * é€’å½’ç›¸å…³ç®—æ³•
+ * é€’å½’ä»£ç è™½ç„¶ç®€æ´é«˜æ•ˆï¼Œä½†æ˜¯ï¼Œé€’å½’ä»£ç ä¹Ÿæœ‰å¾ˆå¤šå¼Šç«¯ã€‚æ¯”å¦‚ï¼Œå †æ ˆæº¢å‡ºã€é‡å¤è®¡ç®—ã€å‡½æ•°è°ƒç”¨è€—æ—¶å¤šã€ç©ºé—´å¤æ‚åº¦é«˜ç­‰
  * @author Administrator
  *
  */
 public class RecuTest {
 	
-	private HashMap<Integer, Long> cache;//±ÜÃâÖØ¸´ÔËËã
+	private HashMap<Integer, Long> cache;//é¿å…é‡å¤è¿ç®—
 	
 	private int currDept;
 	
 	/**
-	 * µİ¹é·½Ê½ÊµÏÖ
+	 * é€’å½’æ–¹å¼å®ç°
 	 * @param total
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public class RecuTest {
 		}
 		
 		if(++ currDept > 100) {
-			throw new IllegalArgumentException("Êı×é³¬ÏŞ");
+			throw new IllegalArgumentException("æ•°ç»„è¶…é™");
 		}
 		
 		long result = getStepNum(n - 1) + getStepNum(n - 2);
@@ -49,7 +49,7 @@ public class RecuTest {
 	}
 	
 	/**
-	 * ·Çµİ¹é·½Ê½ÊµÏÖ
+	 * éé€’å½’æ–¹å¼å®ç°
 	 * 
 	 * @param n
 	 * @return
@@ -84,15 +84,15 @@ public class RecuTest {
 		}
 		
 		for(int i = 0 ; i < k ; i++) {
-			//°Ña[i]ºÍa[k-1]»¥»»
+			//æŠŠa[i]å’Œa[k-1]äº’æ¢
 			int temp = arr[i];
 			arr[i] = arr[k-1];
 			arr[k-1] = temp;
 			
-			//Õë¶Ôk-1µÄÊı×éÔÙ½øĞĞ×ÓÅÅÁĞ
+			//é’ˆå¯¹k-1çš„æ•°ç»„å†è¿›è¡Œå­æ’åˆ—
 			printWays(arr, length, k - 1);
 			
-			//×ÓÅÅÁĞÖ®ºóÒ»¶¨ÒªÔÙ°Ñ»¥»»µÄÔªËØ¸Ä»ØÀ´
+			//å­æ’åˆ—ä¹‹åä¸€å®šè¦å†æŠŠäº’æ¢çš„å…ƒç´ æ”¹å›æ¥
 			temp = arr[i];
 			arr[i] = arr[k-1];
 			arr[k-1] = temp;
@@ -106,15 +106,15 @@ public class RecuTest {
 		
 		int sum = 0;
 		for(int i = 0 ; i < k ; i++) {
-			//°Ña[i]ºÍa[k-1]»¥»»
+			//æŠŠa[i]å’Œa[k-1]äº’æ¢
 			int temp = arr[i];
 			arr[i] = arr[k-1];
 			arr[k-1] = temp;
 			
-			//Õë¶Ôk-1µÄÊı×éÔÙ½øĞĞ×ÓÅÅÁĞ
+			//é’ˆå¯¹k-1çš„æ•°ç»„å†è¿›è¡Œå­æ’åˆ—
 			sum += getWays(arr, length, k - 1);
 			
-			//×ÓÅÅÁĞÖ®ºóÒ»¶¨ÒªÔÙ°Ñ»¥»»µÄÔªËØ¸Ä»ØÀ´
+			//å­æ’åˆ—ä¹‹åä¸€å®šè¦å†æŠŠäº’æ¢çš„å…ƒç´ æ”¹å›æ¥
 			temp = arr[i];
 			arr[i] = arr[k-1];
 			arr[k-1] = temp;
@@ -125,15 +125,15 @@ public class RecuTest {
 	
 	public static void main(String []args) {
 		long before = System.currentTimeMillis();
-		System.out.println("×ßÌ¨½×£¬Ã¿´Î¿ÉÒÔ×ßÒ»²½»òÕßÁ½²½£¬¹²ÓĞ¶àÉÙÖÖ×ß·¨£¿   µİ¹é·½Ê½--->" + new RecuTest().getTotalSteps(80));
-		System.out.println("ºÄÊ±+" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("èµ°å°é˜¶ï¼Œæ¯æ¬¡å¯ä»¥èµ°ä¸€æ­¥æˆ–è€…ä¸¤æ­¥ï¼Œå…±æœ‰å¤šå°‘ç§èµ°æ³•ï¼Ÿ   é€’å½’æ–¹å¼--->" + new RecuTest().getTotalSteps(80));
+		System.out.println("è€—æ—¶+" + (System.currentTimeMillis() - before) + "ms");
 		
 		before = System.currentTimeMillis();
-		System.out.println("×ßÌ¨½×£¬Ã¿´Î¿ÉÒÔ×ßÒ»²½»òÕßÁ½²½£¬¹²ÓĞ¶àÉÙÖÖ×ß·¨£¿   ·Çµİ¹é·½Ê½--->" + new RecuTest().getStepsWithoutRecu(80));
-		System.out.println("ºÄÊ±+" + (System.currentTimeMillis() - before) + "ms");
+		System.out.println("èµ°å°é˜¶ï¼Œæ¯æ¬¡å¯ä»¥èµ°ä¸€æ­¥æˆ–è€…ä¸¤æ­¥ï¼Œå…±æœ‰å¤šå°‘ç§èµ°æ³•ï¼Ÿ   éé€’å½’æ–¹å¼--->" + new RecuTest().getStepsWithoutRecu(80));
+		System.out.println("è€—æ—¶+" + (System.currentTimeMillis() - before) + "ms");
 		
 		int[] arr = {1 , 3 , 5 , 7};
-		System.out.println("¹²ÓĞ" + getWays(arr , arr.length , arr.length) + "ÖÖ×éºÏ");
+		System.out.println("å…±æœ‰" + getWays(arr , arr.length , arr.length) + "ç§ç»„åˆ");
 		printWays(arr , arr.length , arr.length);
 	}
 }

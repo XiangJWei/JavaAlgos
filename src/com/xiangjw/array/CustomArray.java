@@ -1,9 +1,9 @@
 package com.xiangjw.array;
 
 /**
- * ¾²Ì¬Êı×é·â×°Àà£¬¼¯³É²åÈëÉ¾³ı²éÕÒµÈ
- * 1) Êı×éµÄ²åÈë¡¢É¾³ı¡¢°´ÕÕÏÂ±êËæ»ú·ÃÎÊ²Ù×÷£»
- * 2£©Êı×éÖĞµÄÊı¾İÊÇintÀàĞÍµÄ£»
+ * é™æ€æ•°ç»„å°è£…ç±»ï¼Œé›†æˆæ’å…¥åˆ é™¤æŸ¥æ‰¾ç­‰
+ * 1) æ•°ç»„çš„æ’å…¥ã€åˆ é™¤ã€æŒ‰ç…§ä¸‹æ ‡éšæœºè®¿é—®æ“ä½œï¼›
+ * 2ï¼‰æ•°ç»„ä¸­çš„æ•°æ®æ˜¯intç±»å‹çš„ï¼›
  * @author Administrator
  *
  */
@@ -11,12 +11,12 @@ public class CustomArray {
 	private int []arr;
 	
 	/**
-	 * Êı×éÊµ¼ÊµÄ³¤¶È
+	 * æ•°ç»„å®é™…çš„é•¿åº¦
 	 */
 	private int length;
 	
 	/**
-	 * Êı×éÕ¼ÓÃµÄ¿Õ¼ä´óĞ¡
+	 * æ•°ç»„å ç”¨çš„ç©ºé—´å¤§å°
 	 */
 	private int sizeOfArr;
 	
@@ -27,7 +27,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Æ½¾ùÊ±¼ä¸´ÔÓ¶È£ºO(n)
+	 * å¹³å‡æ—¶é—´å¤æ‚åº¦ï¼šO(n)
 	 */
 	public boolean add(int index , int val) {
 		if(index >= sizeOfArr) {
@@ -42,9 +42,9 @@ public class CustomArray {
 		
 		int i;
 		if(length < sizeOfArr) {
-			i = length;//Êı×éÎ´Âú£¬Ôò²»ÓÃÉáÆúÄ©Î»¡£
+			i = length;//æ•°ç»„æœªæ»¡ï¼Œåˆ™ä¸ç”¨èˆå¼ƒæœ«ä½ã€‚
 		}else {
-			i = length - 1;//Êı×éÒÑÂú£¬ÉáÆúÄ©Î»¡£
+			i = length - 1;//æ•°ç»„å·²æ»¡ï¼Œèˆå¼ƒæœ«ä½ã€‚
 		}
 		
 		for(; i > index ; i --) {
@@ -74,7 +74,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Ê±¼ä¸´ÔÓ¶È£ºO(1)
+	 * æ—¶é—´å¤æ‚åº¦ï¼šO(1)
 	 */
 	public boolean add(int val) {
 		if(length == sizeOfArr) {
@@ -87,7 +87,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Ê±¼ä¸´ÔÓ¶È£ºO(1)
+	 * æ—¶é—´å¤æ‚åº¦ï¼šO(1)
 	 */
 	public boolean update(int index , int val) {
 		if(index < 0 || index >= length) {
@@ -100,7 +100,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Æ½¾ùÊ±¼ä¸´ÔÓ¶È£ºO(n)
+	 * å¹³å‡æ—¶é—´å¤æ‚åº¦ï¼šO(n)
 	 */
 	public boolean remove(int index) {
 		if(index < 0 || index >= length) {
@@ -121,7 +121,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Æ½¾ùÊ±¼ä¸´ÔÓ¶È£ºO(n)
+	 * å¹³å‡æ—¶é—´å¤æ‚åº¦ï¼šO(n)
 	 */
 	public int query(int val) {
 		for(int i = 0 ; i < length ; i ++) {
@@ -134,7 +134,7 @@ public class CustomArray {
 	}
 	
 	/**
-	 * Ê±¼ä¸´ÔÓ¶È£ºO(1)
+	 * æ—¶é—´å¤æ‚åº¦ï¼šO(1)
 	 */
 	public int findByIndex(int index) {
 		if(index < 0 || index >= length) {
@@ -146,8 +146,8 @@ public class CustomArray {
 	}
 	
 	/**
-	 * ÊÇ·ñÊÇ»ØĞÎ´®
-	 * ¼´ 12321
+	 * æ˜¯å¦æ˜¯å›å½¢ä¸²
+	 * å³ 12321
 	 */
 	public boolean isPalindrome() {
 		if(length == 0) {
@@ -167,8 +167,8 @@ public class CustomArray {
 	}
 	
 	public void print() {
-		System.out.print("Êı×éÕ¼ÓÃ¿Õ¼ä:" + sizeOfArr + "£¬Êı×éÔªËØ¸öÊı" + length);
-		StringBuffer buffer = new StringBuffer("£¬[");
+		System.out.print("æ•°ç»„å ç”¨ç©ºé—´:" + sizeOfArr + "ï¼Œæ•°ç»„å…ƒç´ ä¸ªæ•°" + length);
+		StringBuffer buffer = new StringBuffer("ï¼Œ[");
 		for(int i = 0 ; i < sizeOfArr ; i ++) {
 			if(i == 0) {
 				buffer.append(arr[i]);
@@ -200,10 +200,10 @@ public class CustomArray {
 		array.print();
 		array.add(-5);
 		array.print();
-		System.out.println("²éÕÒÔªËØ£º" + array.query(7));
-		System.out.println("²éÕÒÔªËØ£º" + array.query(9));
-		System.out.println("²éÕÒÔªËØ£º" + array.findByIndex(6));
-		System.out.println("²éÕÒÔªËØ£º" + array.findByIndex(3));
+		System.out.println("æŸ¥æ‰¾å…ƒç´ ï¼š" + array.query(7));
+		System.out.println("æŸ¥æ‰¾å…ƒç´ ï¼š" + array.query(9));
+		System.out.println("æŸ¥æ‰¾å…ƒç´ ï¼š" + array.findByIndex(6));
+		System.out.println("æŸ¥æ‰¾å…ƒç´ ï¼š" + array.findByIndex(3));
 		
 		array.remove(7);
 		array.print();
@@ -214,6 +214,6 @@ public class CustomArray {
 		array.remove(2);
 		array.print();
 		
-		System.out.println("ÊÇ»ØĞÎ´®Âğ£¿  " + array.isPalindrome());
+		System.out.println("æ˜¯å›å½¢ä¸²å—ï¼Ÿ  " + array.isPalindrome());
 	}
 }
