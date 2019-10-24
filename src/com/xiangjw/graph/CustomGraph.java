@@ -106,9 +106,9 @@ public class CustomGraph {
 		System.out.println("");
 	}
 	
-	private void dfs(CustomArray visited , CustomArray prev , int curr , int t) {
+	private boolean dfs(CustomArray visited , CustomArray prev , int curr , int t) {
 		if(curr == t) {
-			return;
+			return true;
 		}
 		
 		
@@ -116,16 +116,21 @@ public class CustomGraph {
 			int temp = graph.findByIndex(curr).get(i);
 			if(temp == t) {
 				prev.set(temp, curr);
-				return;
+				return true;
 			}
 			
 			if(visited.findByIndex(temp) == -1) {
-				prev.set(temp, curr);
-				visited.set(temp, 1);
+				prev.set(temp, curr);//标记上一任的关系
+				visited.set(temp, 1);//标记节点已访问，下次再到它就不进来了
 				
-				dfs(visited , prev , temp , t);
+				boolean isOk = dfs(visited , prev , temp , t);
+				if(isOk) {
+					return true;//当子递归里找到目标节点时，就不再进行本递归中还未完成的循环了，直接返回。
+				}
 			}
 		}
+		
+		return false;
 	}
 	
 	private void printBfs(CustomArray prev , int s , int t , int k) {
