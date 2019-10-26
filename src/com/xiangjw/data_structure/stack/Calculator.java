@@ -249,7 +249,7 @@ public class Calculator {
 	
 	public static void main(String[] args) {
 		DecimalFormat df = new DecimalFormat("#.00");
-		String info = "(3+5.2)*8-6";
+		String info = "(3+5.2)*8-6*3";
 		Calculator cal = new Calculator(info);
 		System.out.println(info + " = " + df.format(cal.cal()));
 	}
