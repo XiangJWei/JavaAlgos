@@ -1,4 +1,4 @@
-package com.xiangjw.algo.string;
+package com.xiangjw.algo.search;
 
 import java.util.Random;
 
