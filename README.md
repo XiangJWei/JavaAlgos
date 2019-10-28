@@ -61,10 +61,10 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
    7. graph图
       + CustomGraph基于数组加链表实现一个无向图，并实现了如下常用了算法场景。
          - 深度优先搜索；
-         - 广度优先搜索。
+         - 广度优先搜索。                                                               
 ![图](https://xiangjw.oss-cn-qingdao.aliyuncs.com/9.jpg "图")
    8. hash散列表
-      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表、跳表的插入查找性能对比。
+      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表、跳表的插入查找性能对比。                       
 ![散列表](https://xiangjw.oss-cn-qingdao.aliyuncs.com/10.jpg "散列表")
 3. 常用算法部分（algo包）
    1. O实现复杂度分析 
