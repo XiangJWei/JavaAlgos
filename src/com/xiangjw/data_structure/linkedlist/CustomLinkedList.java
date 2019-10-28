@@ -105,6 +105,29 @@ public class CustomLinkedList<T> {
 		return false;
 	}
 	
+	public void removeFirst() {
+		firstNode = firstNode.next;
+		length --;
+	}
+	
+	public void removeNode(T val) {
+		if(firstNode != null && firstNode.data.equals(val)) {
+			firstNode = firstNode.next;
+			length --;
+			return;
+		}
+		
+		Node p = firstNode;
+		while(p != null && p.next != null) {
+			if(p.next.getData().equals(val)) {
+				p.next = p.next.next;
+				length --;
+				break;
+			}
+			p = p.getNext();
+		}
+	}
+	
 	/**
 	 * 往指定元素后追加中间节点
 	 * @param compare
@@ -151,7 +174,6 @@ public class CustomLinkedList<T> {
 			p = p.getNext();
 		}
 	}
-	
 	
 	/**
 	 * 链表判断是否是回形串
@@ -264,6 +286,39 @@ public class CustomLinkedList<T> {
 		}
 		public void setNext(Node next) {
 			this.next = next;
+		}
+	}
+	
+	public Iterator getIterator() {
+		return new Iterator();
+	}
+	
+	public class Iterator{
+		private Node node;
+		
+		public Iterator() {
+			node = firstNode;
+		}
+		
+		public boolean haveData() {
+			return (node != null);
+		}
+		
+		public boolean haveNext() {
+			return (node != null && node.next != null);
+		}
+		
+		public T getNext() {
+			Node next = node.next;
+			return next != null ? next.data : null;
+		}
+		
+		public T getCurr() {
+			return node.data;
+		}
+		
+		public void moveToNext() {
+			node = node.next;
 		}
 	}
 	

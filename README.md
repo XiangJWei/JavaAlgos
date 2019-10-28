@@ -16,13 +16,13 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
       + 对比基础int和Integer封装类运算的时间效率。
 2. 数据结构部分（data_structure包）
    1. array数组
-      + 封装基础数组类CustomArray，以及常用操作。
+      + CustomArray封装基础数组，以及常用操作。
       + CustomArray类中有一个常用算法场景，就是如何判断该数组内容是否为回型串（如12321）。
-      + 封装动态数组类DynamicArray，引入泛型和动态扩容的功能，类似定义了一个简单的ArrayList。
+      + DynamicArray封装动态数组，引入泛型和动态扩容的功能，类似定义了一个简单的ArrayList。
    2. linkedlist链表
-      + 封装基础链表类CustomLinkedList，实现其常用操作。
+      + CustomLinkedList封装基础链表，实现其常用操作。
       + CustomLinkedList类中有一个常用算法场景，就是如何判断该数组内容是否为回型串（如12321）。其实现方式比数组复杂。
-      + 封装了链表常用算法类LinkedListAlgo，实现几种链表的常用场景。
+      + LinkedListAlgo封装链表常用算法类，实现几种链表的常用场景。
          - 引入了哨兵节点；
          - 实现单链表反转；
          - 链表中环的检测；
@@ -49,11 +49,11 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
    6. heap堆
       + CustomHeap实现了一个大顶堆，并封装其常用操作。常用于查找topN等（~~后续会实现其算法场景~~）。
    7. graph图
-      + 基于数组加链表实现一个无向图，并实现了如下常用了算法场景。
+      + CustomGraph基于数组加链表实现一个无向图，并实现了如下常用了算法场景。
          - 深度优先搜索；
          - 广度优先搜索。
-   8. 散列表（hash表）
-      + ~~待完成~~
+   8. hash散列表
+      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。
 3. 常用算法部分（algo包）
    1. O实现复杂度分析 
       + OTest常见基本场景的时间复杂度分析与对比。
