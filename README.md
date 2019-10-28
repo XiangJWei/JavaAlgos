@@ -53,7 +53,7 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
          - 深度优先搜索；
          - 广度优先搜索。
    8. hash散列表
-      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。
+      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表的插入查找性能对比。
 3. 常用算法部分（algo包）
    1. O实现复杂度分析 
       + OTest常见基本场景的时间复杂度分析与对比。

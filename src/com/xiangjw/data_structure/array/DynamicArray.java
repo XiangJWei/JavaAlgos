@@ -31,11 +31,9 @@ public class DynamicArray<T> {
 	 */
 	public boolean add(int index , T val) {
 		if(index > sizeOfArr) {
-			System.out.println("out of sizeOfArr");
 			return false;
 		}
 		if(index < 0 || index > length) {
-			System.out.println("out of length");
 			return false;
 		}
 		
@@ -142,7 +140,6 @@ public class DynamicArray<T> {
 	 */
 	public T findByIndex(int index) {
 		if(index < 0 || index >= length) {
-			System.out.println("out of length");
 			return null;
 		}
 		

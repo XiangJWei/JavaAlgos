@@ -1,5 +1,8 @@
 package com.xiangjw.data_structure.hash;
 
+import java.util.Random;
+
+import com.xiangjw.data_structure.array.DynamicArray;
 import com.xiangjw.data_structure.linkedlist.CustomLinkedList;
 
 /**
@@ -150,6 +153,10 @@ public class CustomHashTable<K , V> {
 		}
 	}
 	
+	/**
+	 * 数组扩容/缩容
+	 * @param size
+	 */
 	private void resize(int size) {
 		CustomLinkedList<KVObject>[] temp = new CustomLinkedList[size];
 		for(int i = 0 ; i < size ; i ++) {
@@ -239,5 +246,98 @@ public class CustomHashTable<K , V> {
 		map.remove(9);map.print();
 		map.remove(19);map.print();
 		map.remove(6);map.print();
+		
+		//性能对比时刻
+		int size = 100 , length = 1000;
+		DynamicArray[] array = new DynamicArray[size];
+		CustomLinkedList[] link = new CustomLinkedList[size];
+		CustomHashTable<Integer, Integer>[] table = new CustomHashTable[size];
+		
+		Random random = new Random();
+		KV[] testData = new KV[length];
+		for(int i = 0 ; i < length ; i ++) {
+			testData[i] = new KV(random.nextInt(length), random.nextInt(length));
+		}
+		
+		long before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			array[i] = new DynamicArray<KV>(10);
+			for(int j = 0 ; j < length ; j ++) {
+				array[i].add(testData[j].getKey() , testData[j]);
+			}
+		}
+		System.out.println(size + "个数组插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			link[i] = new CustomLinkedList<KV>();
+			for(int j = 0 ; j < length ; j ++) {
+				link[i].addToLast(testData[j]);
+			}
+		}
+		System.out.println(size + "个链表插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			table[i] = new CustomHashTable<Integer, Integer>(10);
+			for(int j = 0 ; j < length ; j ++) {
+				table[i].put(testData[j].getKey(), testData[j].getValue());
+			}
+		}
+		System.out.println(size + "个散列表插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
+	
+		int[] randomSearch = new int[length / 2];
+		for(int i = 0 ; i < randomSearch.length ; i ++) {
+			randomSearch[i] = random.nextInt(length);
+		}
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			for(int j = 0 ; j < randomSearch.length ; j ++) {
+				array[i].query(randomSearch[i]);
+			}
+		}
+		System.out.println(size + "个数组，每个" + length + "条数据，查找" + randomSearch.length + "次，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			for(int j = 0 ; j < randomSearch.length ; j ++) {
+				link[i].isExist(randomSearch[i]);
+			}
+		}
+		System.out.println(size + "个链表，每个" + length + "条数据，查找" + randomSearch.length + "次，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			for(int j = 0 ; j < randomSearch.length ; j ++) {
+				table[i].get(randomSearch[i]);
+			}
+		}
+		System.out.println(size + "个链表，每个" + length + "条数据，查找" + randomSearch.length + "次，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
 	}
+}
+
+class KV{
+	private int key;
+	
+	private int value;
+	
+	public int getKey() {
+		return key;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+
+
+	public KV(int key, int value) {
+		super();
+		this.key = key;
+		this.value = value;
+	}
+	
+	
 }
