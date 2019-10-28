@@ -40,7 +40,7 @@ public class SkipLinkedList {
 		Node node = new Node(val , level);//要插入的节点
 		Node[] brothers = new Node[level];//找到每一层这个待插节点的前节点。
 		for(int i = level - 1 ; i >= 0 ; i --) {
-			while(p.forwards[i] != null && p.forwards[i].data < val) {
+			while(p.forwards.length >= level && p.forwards[i] != null && p.forwards[i].data < val) {
 				p = p.forwards[i];//先找到第i层最后一个小于val的节点，也就是新节点会插到它后面
 			}
 			
