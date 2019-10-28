@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.xiangjw.data_structure.array.DynamicArray;
 import com.xiangjw.data_structure.linkedlist.CustomLinkedList;
+import com.xiangjw.data_structure.linkedlist.SkipLinkedList;
 
 /**
  * 设计一个简单的散列表，类似hashmap
@@ -252,6 +253,7 @@ public class CustomHashTable<K , V> {
 		DynamicArray[] array = new DynamicArray[size];
 		CustomLinkedList[] link = new CustomLinkedList[size];
 		CustomHashTable<Integer, Integer>[] table = new CustomHashTable[size];
+		SkipLinkedList[] skipList = new SkipLinkedList[size];
 		
 		Random random = new Random();
 		KV[] testData = new KV[length];
@@ -261,18 +263,18 @@ public class CustomHashTable<K , V> {
 		
 		long before = System.currentTimeMillis();
 		for(int i = 0 ; i < size ; i ++) {
-			array[i] = new DynamicArray<KV>(10);
+			array[i] = new DynamicArray<Integer>(10);
 			for(int j = 0 ; j < length ; j ++) {
-				array[i].add(testData[j].getKey() , testData[j]);
+				array[i].add(testData[j].getKey() , testData[j].getValue());
 			}
 		}
 		System.out.println(size + "个数组插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
 		
 		before = System.currentTimeMillis();
 		for(int i = 0 ; i < size ; i ++) {
-			link[i] = new CustomLinkedList<KV>();
+			link[i] = new CustomLinkedList<Integer>();
 			for(int j = 0 ; j < length ; j ++) {
-				link[i].addToLast(testData[j]);
+				link[i].addToLast(testData[j].getValue());
 			}
 		}
 		System.out.println(size + "个链表插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
@@ -285,6 +287,15 @@ public class CustomHashTable<K , V> {
 			}
 		}
 		System.out.println(size + "个散列表插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			skipList[i] = new SkipLinkedList();
+			for(int j = 0 ; j < length ; j ++) {
+				skipList[i].insert(testData[j].getValue());
+			}
+		}
+		System.out.println(size + "个跳表插入" + length + "个数据，耗时" + (System.currentTimeMillis() - before) + "ms");
 	
 		int[] randomSearch = new int[length / 2];
 		for(int i = 0 ; i < randomSearch.length ; i ++) {
@@ -314,6 +325,14 @@ public class CustomHashTable<K , V> {
 			}
 		}
 		System.out.println(size + "个链表，每个" + length + "条数据，查找" + randomSearch.length + "次，耗时" + (System.currentTimeMillis() - before) + "ms");
+		
+		before = System.currentTimeMillis();
+		for(int i = 0 ; i < size ; i ++) {
+			for(int j = 0 ; j < randomSearch.length ; j ++) {
+				skipList[i].find(randomSearch[i]);
+			}
+		}
+		System.out.println(size + "个跳表，每个" + length + "条数据，查找" + randomSearch.length + "次，耗时" + (System.currentTimeMillis() - before) + "ms");
 		
 	}
 }

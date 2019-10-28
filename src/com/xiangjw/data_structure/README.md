@@ -37,7 +37,7 @@
          - 深度优先搜索；
          - 广度优先搜索。
    8. hash散列表
-      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表的插入查找性能对比。
+      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表、跳表的插入查找性能对比。
 
 ---
 END
