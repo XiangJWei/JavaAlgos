@@ -19,6 +19,7 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
       + CustomArray封装基础数组，以及常用操作。
       + CustomArray类中有一个常用算法场景，就是如何判断该数组内容是否为回型串（如12321）。
       + DynamicArray封装动态数组，引入泛型和动态扩容的功能，类似定义了一个简单的ArrayList。
+![avatar](https://static001.geekbang.org/resource/image/98/c4/98df8e702b14096e7ee4a5141260cdc4.jpg)
    2. linkedlist链表
       + CustomLinkedList封装基础链表，实现其常用操作。
       + CustomLinkedList类中有一个常用算法场景，就是如何判断该数组内容是否为回型串（如12321）。其实现方式比数组复杂。
