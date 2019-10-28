@@ -215,9 +215,9 @@ public class StringCompare {
 		for(int i = 0 ; i < size ; i ++) {
 			int res = findByBF(new String(parents[i]), new String(children[i]));
 			if(res >= 0) {
-				System.out.println("父串：" + new String(parents[i]).substring(res , res + children[i].length));
-				System.out.println("子串：" + new String(children[i]));
-				System.out.println("匹配到下标：" + res);
+				System.out.print("父串：" + new String(parents[i]).substring(res , res + children[i].length));
+				System.out.print("，子串：" + new String(children[i]));
+				System.out.println("，匹配到下标：" + res);
 				successCount ++;
 			}
 		}
@@ -228,9 +228,9 @@ public class StringCompare {
 		for(int i = 0 ; i < size ; i ++) {
 			int res = findByRK(new String(parents[i]), new String(children[i]));
 			if(res >= 0) {
-				System.out.println("父串：" + new String(parents[i]).substring(res , res + children[i].length));
-				System.out.println("子串：" + new String(children[i]));
-				System.out.println("匹配到下标：" + res);
+				System.out.print("父串：" + new String(parents[i]).substring(res , res + children[i].length));
+				System.out.print("，子串：" + new String(children[i]));
+				System.out.println("，匹配到下标：" + res);
 				successCount ++;
 			}
 		}
@@ -241,9 +241,9 @@ public class StringCompare {
 		for(int i = 0 ; i < size ; i ++) {
 			int res = findByBM(new String(parents[i]), new String(children[i]));
 			if(res >= 0) {
-				System.out.println("父串：" + new String(parents[i]).substring(res , res + children[i].length));
-				System.out.println("子串：" + new String(children[i]));
-				System.out.println("匹配到下标：" + res);
+				System.out.print("父串：" + new String(parents[i]).substring(res , res + children[i].length));
+				System.out.print("，子串：" + new String(children[i]));
+				System.out.println("，匹配到下标：" + res);
 				successCount ++;
 			}
 		}
