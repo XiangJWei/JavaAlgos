@@ -184,12 +184,62 @@ public class StringCompare {
 		return -1;
 	}
 	
+	public static int findByKMP(String parent , String child) {
+		if(parent == null || child == null || parent.length() < child.length()) {
+			return -1;
+		}
+		
+		char[] a = parent.toCharArray();
+		char[] b = child.toCharArray();
+		
+		//下标i表示：当前好前缀的最后一位下标；next[i]表示在此好前缀范围内可以跟其后缀子串匹配的的最大前缀子串的右下标
+		int[] next = new int[b.length];
+		next[0] = -1;
+		int k = -1;
+		for(int i = 1 ; i < b.length ; i ++) {
+			while(k != -1 && b[k + 1] != b[i]) {
+				k = next[k];
+			}
+			
+			if(b[k + 1] == b[i]) {
+				k ++;
+			}
+			
+			next[i] = k;
+		}
+		
+		int i = 0 ; 
+		while(i <= a.length - b.length) {
+			int temp = i;
+			for(int j = 0 ; j < b.length ; j ++) {
+				if(a[temp] != b[j]) {
+					//找到坏字符
+					if(j == 0) {
+						i ++;
+						break;
+					}else {
+						i = i + j - next[j - 1] + 1;
+						break;
+					}
+				}else if(j == b.length - 1) {
+					return i;
+				}else {
+					temp ++;
+				}
+			}
+		}
+		
+	
+		return -1;
+	}
+	
 	public static void main(String[] args) {
 		String parent = "abcdefghijklmn";
-		String child = "hij";
+		String child = "ijk";
 		System.out.println("BF算法从“" + parent + "”中查找“" + child + "”查找\n结果为：" + findByBF(parent, child));
 		System.out.println("RK算法从“" + parent + "”中查找“" + child + "”查找\n结果为：" + findByRK(parent, child));
 		System.out.println("BM算法从“" + parent + "”中查找“" + child + "”查找\n结果为：" + findByBM(parent, child));
+		System.out.println("KMP算法从“" + parent + "”中查找“" + child + "”查找\n结果为：" + findByKMP(parent, child));
 		
 		Random random = new Random();
 		int size = 100 , length = 10000;
@@ -248,5 +298,18 @@ public class StringCompare {
 			}
 		}
 		System.out.println("BM算法从" + size + "个数组，每个数组" + length + "个元素中搜索子串，耗时" + (System.currentTimeMillis() - before) + "ms，成功匹配数量:" + successCount);
+		
+		before = System.currentTimeMillis();
+		successCount = 0;
+		for(int i = 0 ; i < size ; i ++) {
+			int res = findByKMP(new String(parents[i]), new String(children[i]));
+			if(res >= 0) {
+				System.out.print("父串：" + new String(parents[i]).substring(res , res + children[i].length));
+				System.out.print("，子串：" + new String(children[i]));
+				System.out.println("，匹配到下标：" + res);
+				successCount ++;
+			}
+		}
+		System.out.println("KMP算法从" + size + "个数组，每个数组" + length + "个元素中搜索子串，耗时" + (System.currentTimeMillis() - before) + "ms，成功匹配数量:" + successCount);
 	}
 }
