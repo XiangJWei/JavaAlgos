@@ -184,6 +184,14 @@ public class StringCompare {
 		return -1;
 	}
 	
+	/**
+	 * KMP算法，类似于BM算法，是通过坏字符和好前缀来最大限度进行跳跃式检索
+	 * 目前最普遍的字符串匹配算法之一
+	 * 
+	 * @param parent
+	 * @param child
+	 * @return
+	 */
 	public static int findByKMP(String parent , String child) {
 		if(parent == null || child == null || parent.length() < child.length()) {
 			return -1;
@@ -207,6 +215,20 @@ public class StringCompare {
 			
 			next[i] = k;
 		}
+		
+		//以下两种遍历方式都可以
+//		int j = 0;
+//		for (int i = 0; i < a.length; ++i) {
+//			while (j > 0 && a[i] != b[j]) { // 一直找到a[i]和b[j]
+//				j = next[j - 1] + 1;
+//			}
+//			if (a[i] == b[j]) {
+//				++j;
+//			}
+//			if (j == b.length) { // 找到匹配模式串的了
+//				return i - b.length + 1;
+//			}
+//		}
 		
 		int i = 0 ; 
 		while(i <= a.length - b.length) {
