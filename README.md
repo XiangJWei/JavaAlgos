@@ -97,8 +97,10 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
          - BM跳跃式对比算法（结合坏字符和好后缀）；
          - KMP跳跃式对比算法（结合坏字符和好前缀）。
    5. lru缓存算法
-      + LruArray利用数组实现lru的简单缓存工具。
+      + LruArray利用数组实现lru的简单缓存工具；
       + LruLinkedList利用链表实现lru的简单缓存工具。
+   6.level.middle中级算法
+      + GreedAlgo贪心算法。
 
 ---
 END
