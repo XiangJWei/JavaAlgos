@@ -12,6 +12,8 @@ import com.xiangjw.data_structure.array.DynamicArray;
  * 
  * 场景一：放豆子
  * 场景二：分糖果
+ * 场景三：钱币找零
+ * 场景四：区间覆盖
  * 
  * @author xiangjw
  *
@@ -115,6 +117,93 @@ public class GreedAlgo {
 		}
 	}
 	
+	/**
+	 * 钱币找零
+	 * 假设我们有 1 元、2 元、5 元、10 元、20 元、50 元、100 元这些面额的纸币，它们的张数分别是 c1、c2、c5、c10、c20、c50、c100。我们现在要用这些钱来支付 K 元，最少要用多少张纸币呢？
+	 * 
+	 * @param moneys 自己有多少钱
+	 * @param totalMoney 要花多少钱
+	 */
+	public static void spendMoney(DynamicArray<Money> moneys , int totalMoney) {
+		//先把自己的钱按面值从小到大排序
+		for(int i = 0 ; i < moneys.getLength() ; i ++) {
+			for(int j = 0 ; j < moneys.getLength() - i - 1 ; j ++) {
+				if(moneys.findByIndex(j).getValue() > moneys.findByIndex(j + 1).getValue()) {
+					Money temp = moneys.findByIndex(j);
+					moneys.update(j, moneys.findByIndex(j + 1));
+					moneys.update(j + 1, temp);
+				}
+			}
+		}
+		
+		moneys.print();
+		spend(moneys, totalMoney);
+	}
+	
+	private static void spend(DynamicArray<Money> moneys , int totalMoney) {
+		int index = moneys.getLength() - 1;
+		while(index >= 0 && totalMoney > 0) {
+			Money item = moneys.findByIndex(index);
+			if(totalMoney >= item.getValue()) {//这个面值可以用
+				int needNum = totalMoney / item.getValue();
+				if(item.getCount() > needNum) {
+					System.out.println("拿出" + needNum + "张" + item.getValue() + "元");
+					totalMoney -= needNum * item.getValue();
+					item.setCount(item.getCount() - needNum);
+				}else {
+					System.out.println("拿出" + item.getCount() + "张" + item.getValue() + "元");
+					totalMoney -= item.getCount() * item.getValue();
+					item.setCount(0);
+				}
+			}
+			
+			index --;
+		}
+		
+		if(totalMoney > 0) {
+			System.out.println("钱不够啊亲");
+		}
+	}
+	
+	/**
+	 * 假设我们有 n 个区间，区间的起始端点和结束端点分别是 [l1, r1]，[l2, r2]，[l3, r3]，……，[ln, rn]。我们从这 n 个区间中选出一部分区间，这部分区间满足两两不相交（端点相交的情况不算相交），最多能选出多少个区间呢？
+	 * 
+	 * @param regions
+	 */
+	public static void getUnOverRegions(DynamicArray<Region> regions) {
+		//先把这些区间按照起始点从小到大排序
+		for(int i = 0 ; i < regions.getLength() ; i ++) {
+			for(int j = 0 ; j < regions.getLength() - i - 1 ; j ++) {
+				if(regions.findByIndex(j).getStart() > regions.findByIndex(j + 1).getStart()) {
+					Region temp = regions.findByIndex(j);
+					regions.update(j, regions.findByIndex(j + 1));
+					regions.update(j + 1, temp);
+				}
+			}
+		}
+		
+		regions.print();
+		getRegion(regions , regions.findByIndex(0).getStart());//第一个节点的起始节点其实就是所有元素的最小值
+	}
+	
+	public static void getRegion(DynamicArray<Region> regions , int startValue) {
+		Region item = null;//本轮找到的满足不重合条件的右值最小的
+		for(int i = 0 ; i < regions.getLength() ; i ++) {
+			if(regions.findByIndex(i).getStart() >= startValue) {//找到大于等于startValue的，就是满足不重合条件的
+				if(item == null) {
+					item = regions.findByIndex(i);
+				}else if(item.getEnd() > regions.findByIndex(i).getEnd()) {
+					item = regions.findByIndex(i);
+				}
+			}
+		}
+		
+		if(item != null) {
+			System.out.println("选出区间[" + item.getStart() + "," + item.getEnd() + "]");
+			getRegion(regions , item.getEnd());//接着找大于等于当前右值找下一个节点
+		}
+	}
+	
 	public static void main(String[] args) {
 		DynamicArray<Beans> beans = new DynamicArray<Beans>(5);
 		beans.add(new Beans("黄豆" , 100 , 100));
@@ -139,6 +228,25 @@ public class GreedAlgo {
 		children.add(new Children("王五", 2));
 		children.add(new Children("赵六", 4));
 		giveCandy(candy, children);
+		
+		DynamicArray<Money> moneys = new DynamicArray<Money>(5);
+		moneys.add(new Money(100, 3));
+		moneys.add(new Money(50, 5));
+		moneys.add(new Money(20, 7));
+		moneys.add(new Money(10, 4));
+		moneys.add(new Money(5, 3));
+		moneys.add(new Money(2, 20));
+		moneys.add(new Money(1, 100));
+		spendMoney(moneys, 568);
+		
+		DynamicArray<Region> regions = new DynamicArray<Region>(5);
+		regions.add(new Region(6, 8));
+		regions.add(new Region(2, 4));
+		regions.add(new Region(3, 5));
+		regions.add(new Region(1, 5));
+		regions.add(new Region(5, 9));
+		regions.add(new Region(8, 10));
+		getUnOverRegions(regions);
 	}
 }
 
@@ -206,6 +314,60 @@ class Children{
 	@Override
 	public String toString() {
 		return "Children [name=" + name + ", need=" + need + "]";
+	}
+	
+}
+
+class Money{
+	private int value;//面值
+	private int count;//数量
+
+	public Money(int value, int count) {
+		super();
+		this.value = value;
+		this.count = count;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	@Override
+	public String toString() {
+		return "Money [value=" + value + ", count=" + count + "]";
+	}
+}
+
+class Region{
+	private int start;//区间起点
+	
+	private int end;//区间终点
+
+	public Region(int start, int end) {
+		super();
+		this.start = start;
+		this.end = end;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	@Override
+	public String toString() {
+		return "Region [start=" + start + ", end=" + end + "]";
 	}
 	
 }
