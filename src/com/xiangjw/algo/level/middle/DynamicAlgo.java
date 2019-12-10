@@ -38,11 +38,32 @@ public class DynamicAlgo {
 			}
 		}
 		
+		//打印出二维数组
 		for(int i = 0 ; i < cache.length ; i ++) {
 			for(int j = 0 ; j < cache[i].length; j ++) {
 				System.out.print((cache[i][j] ? 1 : 0) + ",");
 			}
 			System.out.println("");
+		}
+		
+		//反推放了哪些东西
+		int j = weight;
+		for(int i = cache.length - 1 ; i >= 0 ; i --) {
+			while(!cache[i][j] && i == cache.length - 1) {
+				j--;
+			}
+			
+			if(i == cache.length - 1) {
+				System.out.println("规划出的最大重量为：" + j);
+			}
+			
+			if(i == 0 && j == weights.findByIndex(i).getWeight()) {
+				System.out.println("放了" + weights.findByIndex(i).getName() + "，其重量为" + weights.findByIndex(i).getWeight());
+			}else if(j >= weights.findByIndex(i).getWeight() 
+					&& cache[i - 1][j - weights.findByIndex(i).getWeight()]) {
+				System.out.println("放了" + weights.findByIndex(i).getName() + "，其重量为" + weights.findByIndex(i).getWeight());
+				j = j - weights.findByIndex(i).getWeight();
+			}
 		}
 	}
 	
@@ -50,13 +71,13 @@ public class DynamicAlgo {
 		long before = System.currentTimeMillis();
 		System.out.println("0-1简单背包求解：");
 		DynamicArray<Goods> weights = new DynamicArray<Goods>(5);
-		weights.add(new Goods("石头", 2));
-		weights.add(new Goods("黄瓜", 2));
-		weights.add(new Goods("电脑", 4));
-		weights.add(new Goods("浴室柜", 6));
-		weights.add(new Goods("手机", 3));
+		weights.add(new Goods("石头", 20));
+		weights.add(new Goods("黄瓜", 5));
+		weights.add(new Goods("电脑", 7));
+		weights.add(new Goods("浴室柜", 30));
+		weights.add(new Goods("手机", 12));
 
-		printBags(weights, 9);
-//		System.out.println("0-1背包最大解为：" + maxPlan + "，最大重量：" + maxWeight);
+		printBags(weights, 40);
+		System.out.println("0-1背包耗时：" + (System.currentTimeMillis() - before) + "ms");
 	}
 }
