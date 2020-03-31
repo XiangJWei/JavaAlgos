@@ -4,8 +4,6 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
 - 本例为学习数据结构和算法过程中编写的示例代码，为加深印象，供参考。大神可绕道，不足之处还请指正，互相学习，感谢支持~
 - doc目录下存放的程序猿必备神器，如阿里巴巴代码规范
 
-> 文中图片素材来源于[极客邦](https://www.geekbang.org/ "极客邦")
-
 ### 具体内容如下
 以下按照难度的由简入繁进行排序，新手建议按照下面的顺序进行研究；
 如下只是目录简要说明，具体类里有较详细的说明和注释，供详细研究。
@@ -20,7 +18,7 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
    1. array数组
       + CustomArray封装基础数组，以及常用操作。
       + CustomArray类中有一个常用算法场景，就是如何判断该数组内容是否为回型串（如12321）。
-      + DynamicArray封装动态数组，引入泛型和动态扩容的功能，类似定义了一个简单的ArrayList。
+      + DynamicArray封装动态数组，引入泛型和动态扩容的功能，类似定义了一个简单的ArrayList。 
 ![数组](http://www.xiangjw.tk/res/img/1.jpg "数组")
    2. linkedlist链表
       + CustomLinkedList封装基础链表，实现其常用操作。
@@ -32,19 +30,19 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
          - 两个有序的链表合并；
          - 删除链表倒数第 n 个结点；
          - 求链表的中间结点；
-      + SkipLinkedList跳表，利用链表实现插入删除查找都还比较快的一种方式。
-![链表 vs 数组](http://www.xiangjw.tk/res/img/2.jpg "链表 vs 数组")
+      + SkipLinkedList跳表，利用链表实现插入删除查找都还比较快的一种方式。 
+![链表 vs 数组](http://www.xiangjw.tk/res/img/2.jpg "链表 vs 数组") 
 ![跳表](http://www.xiangjw.tk/res/img/3.jpg "跳表")
    3. stack栈
       + ArrayStack利用数组实现栈的功能，封装常用入栈出栈操作，可动态扩容。
       + LinkedlistStack利用链表实现栈的功能，封装常用入栈出栈操作。
       + Brower是一个常用的算法场景，利用栈实现一个建议的浏览器前进后退的功能。
-      + Calculator也是一个常用的算法场景，利用栈实现一个建议计算，比如计算(3+5.2)/8-6/3的结果。
+      + Calculator也是一个常用的算法场景，利用栈实现一个建议计算，比如计算(3+5.2)/8-6/3的结果。 
 ![栈](http://www.xiangjw.tk/res/img/4.jpg "栈")
    4. queue队列
       + ArrayQuene利用简单数组实现队列功能，动态扩容，存在内存浪费。
       + ArrayCircleQueue利用数组实现一个容量固定的循环队列。
-      + LinkedListQueue利用链表实现一个队列。
+      + LinkedListQueue利用链表实现一个队列。 
 ![队列 vs 栈](http://www.xiangjw.tk/res/img/5.jpg "队列 vs 栈")
    5. tree二叉树
       + CustomTree定义一个基础的二叉树，并实现了如下常用的算法场景。
@@ -53,19 +51,19 @@ JAVA实现的各种数据结构和常用算法代码样例，并包含部分性�
          - 后序遍历；
          - 按层次遍历（重难点）。
       + BinarySearchTree二叉查找树，其中序遍历出来就是有序的，常用于数据排序（如红黑树）；
-      + TrieTree，常用于寻找前缀匹配的字符串，如搜索引擎关键字检索。
-![二叉树](http://www.xiangjw.tk/res/img/6.jpg "二叉树")
+      + TrieTree，常用于寻找前缀匹配的字符串，如搜索引擎关键字检索。 
+![二叉树](http://www.xiangjw.tk/res/img/6.jpg "二叉树") 
 ![二叉查找树](http://www.xiangjw.tk/res/img/7.jpg "二叉查找树")
    6. heap堆
-      + CustomHeap实现了一个大顶堆，并封装其常用操作。常用于查找topN等（~~后续会实现其算法场景~~）。
+      + CustomHeap实现了一个大顶堆，并封装其常用操作。常用于查找topN等。 
 ![堆](http://www.xiangjw.tk/res/img/8.jpg "堆")
    7. graph图
       + CustomGraph基于数组加链表实现一个无向图，并实现了如下常用了算法场景。
          - 深度优先搜索；
-         - 广度优先搜索。                                                               
+         - 广度优先搜索。 
 ![图](http://www.xiangjw.tk/res/img/9.jpg "图")
    8. hash散列表
-      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表、跳表的插入查找性能对比。                       
+      + CustomHashTable封装简单的hashmap，实现常用put、get、remove操作。含数组、链表、散列表、跳表的插入查找性能对比。 
 ![散列表](http://www.xiangjw.tk/res/img/10.jpg "散列表")
 3. 常用算法部分（algo包）
    1. O实现复杂度分析 
