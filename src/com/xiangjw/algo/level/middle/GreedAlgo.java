@@ -1,7 +1,5 @@
 package com.xiangjw.algo.level.middle;
 
-import java.util.Arrays;
-
 import com.xiangjw.data_structure.array.DynamicArray;
 
 /**

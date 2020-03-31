@@ -30,8 +30,10 @@
    5. lru缓存算法
       + LruArray利用数组实现lru的简单缓存工具；
       + LruLinkedList利用链表实现lru的简单缓存工具。
-   6.level.middle中级算法
-      + GreedAlgo贪心算法。
+   6. level.middle中级算法
+      + GreedAlgo贪心算法；
+      + RecallAlgo回溯算法；
+      + DynamicAlgo动态规划算法。
    
 ---
 END
